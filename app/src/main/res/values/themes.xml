@@ -1,8 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.Aston_Intensiv_Final" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/primary60</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="android:editTextColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:textCursorDrawable">@color/white</item>
+        <item name="searchViewStyle">@style/SearchViewMy</item>
     </style>
 
     <style name="Theme.Aston_Intensiv_Final" parent="Base.Theme.Aston_Intensiv_Final" />
