@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import com.rudachenkoroman.astonIntensivFinal.R
 import com.rudachenkoroman.astonIntensivFinal.databinding.FragmentDetailNewsBinding
 import com.rudachenkoroman.astonIntensivFinal.model.news.Article
@@ -33,7 +34,7 @@ class DetailNewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val article = requireArguments().getSerializableCompat(BUNDLE_KEY,Article::class.java)
+        val article = requireArguments().getSerializableCompat(BUNDLE_KEY, Article::class.java)
         if (article != null) {
             setupFields(article)
         }
@@ -47,17 +48,37 @@ class DetailNewsFragment : Fragment() {
                 .into(binding.detailImage)
             collapsingToolbarLayout.title = article.title
             detailTitle.text = article.title
-            detailDate.text = article.publishedAt.replace("T"," | ").replace("Z","")
             detailSource.text = article.source.name
-            detailContent.text = article.content.removeRange(200, 214)
+            showDateNews(article)
+            showNotContentImage(article)
         }
     }
 
-    private fun showTitleNews(){
+    private fun showDateNews(article: Article){
+        binding.apply {
+            if (article.publishedAt == null ){
+                detailDate.text = getString(R.string.unknown_date)
+            }else {
+                detailDate.text = article.publishedAt.replace("T", " | ").replace("Z", "")
+            }
+        }
+    }
+
+    private fun showNotContentImage(article: Article) {
+        binding.apply {
+            if (article.content == null) {
+                notContentImage.isVisible = true
+            } else {
+                detailContent.text = article.content.removeRange(article.content.length - 14,article.content.length)
+            }
+        }
+    }
+
+    private fun showTitleNews() {
         binding.apply {
             collapsingToolbarLayout.isTitleEnabled = true
             collapsingToolbarLayout.setCollapsedTitleTextColor(Color.rgb(255, 255, 255))
-            collapsingToolbarLayout.setExpandedTitleColor(Color.argb(0,0,0,0))
+            collapsingToolbarLayout.setExpandedTitleColor(Color.argb(0, 0, 0, 0))
         }
     }
 

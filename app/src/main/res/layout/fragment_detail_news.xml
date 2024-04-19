@@ -44,6 +44,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
+            <ImageView
+                android:id="@+id/notContentImage"
+                android:layout_width="240dp"
+                android:layout_height="153dp"
+                android:src="@drawable/not_content_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="invisible"
+                android:layout_marginTop="200dp"/>
+
             <TextView
                 android:id="@+id/detailTitle"
                 android:layout_width="match_parent"
