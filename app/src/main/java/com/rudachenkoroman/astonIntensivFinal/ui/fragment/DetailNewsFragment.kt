@@ -26,6 +26,7 @@ class DetailNewsFragment : Fragment() {
 
     private lateinit var binding: FragmentDetailNewsBinding
     private val removedContent = "[Removed]"
+    private val targetSymbol = " ["
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,11 +62,11 @@ class DetailNewsFragment : Fragment() {
         }
     }
 
-    private fun showDateNews(article: Article){
+    private fun showDateNews(article: Article) {
         binding.apply {
-            if (article.publishedAt == null || article.content == removedContent ){
+            if (article.publishedAt == null || article.content == removedContent) {
                 detailDate.text = removedContent
-            }else {
+            } else {
                 detailDate.text = article.publishedAt.replace("T", " | ").replace("Z", "")
             }
         }
@@ -76,27 +77,37 @@ class DetailNewsFragment : Fragment() {
             if (article.content == null || article.content == removedContent) {
                 notContentImage.isVisible = true
             } else {
-                var text : String = article.content
-                val targetSymbol = " ["
-                val startRemove = text.lastIndexOf(targetSymbol)
-                text = text.removeRange(startRemove,text.length)
-                val contentText = SpannableString(text)
-                val clickableSpan = object : ClickableSpan(){
-                    override fun onClick(widget: View) {
-                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(article.url))
-                        startActivity(intent)
-                    }
-                }
-                var start = contentText.lastIndexOf(".")
-                start += if ( start == -1 ){
-                    1
-                } else {
-                    2
-                }
-                contentText.setSpan(clickableSpan,start,contentText.length,Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
-                detailContent.text = contentText
-                detailContent.movementMethod = LinkMovementMethod.getInstance()
+                clickToLinkNews(article)
             }
+        }
+    }
+
+    private fun clickToLinkNews(article: Article) {
+        var text: String = article.content
+        val startRemove = text.lastIndexOf(targetSymbol)
+        text = text.removeRange(startRemove, text.length)
+        val contentText = SpannableString(text)
+        val clickableSpan = object : ClickableSpan() {
+            override fun onClick(widget: View) {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(article.url))
+                startActivity(intent)
+            }
+        }
+        var start = contentText.lastIndexOf(".")
+        start += if (start == -1) {
+            1
+        } else {
+            2
+        }
+        contentText.setSpan(
+            clickableSpan,
+            start,
+            contentText.length,
+            Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+        )
+        binding.apply {
+            detailContent.text = contentText
+            detailContent.movementMethod = LinkMovementMethod.getInstance()
         }
     }
 
