@@ -1,7 +1,13 @@
 package com.rudachenkoroman.astonIntensivFinal.ui.fragment
 
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +17,7 @@ import com.rudachenkoroman.astonIntensivFinal.R
 import com.rudachenkoroman.astonIntensivFinal.databinding.FragmentDetailNewsBinding
 import com.rudachenkoroman.astonIntensivFinal.model.news.Article
 import com.bumptech.glide.Glide
-import com.rudachenkoroman.astonIntensivFinal.getSerializableCompat
+import com.rudachenkoroman.astonIntensivFinal.util.getSerializableCompat
 
 const val BUNDLE_KEY = "BUNDLE_KEY"
 const val DETAIL_NEWS_FRAGMENT_TAG = "USER_DETAILS_FRAGMENT_TAG"
@@ -19,6 +25,7 @@ const val DETAIL_NEWS_FRAGMENT_TAG = "USER_DETAILS_FRAGMENT_TAG"
 class DetailNewsFragment : Fragment() {
 
     private lateinit var binding: FragmentDetailNewsBinding
+    private val removedContent = "[Removed]"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,8 +63,8 @@ class DetailNewsFragment : Fragment() {
 
     private fun showDateNews(article: Article){
         binding.apply {
-            if (article.publishedAt == null ){
-                detailDate.text = getString(R.string.unknown_date)
+            if (article.publishedAt == null || article.content == removedContent ){
+                detailDate.text = removedContent
             }else {
                 detailDate.text = article.publishedAt.replace("T", " | ").replace("Z", "")
             }
@@ -66,10 +73,29 @@ class DetailNewsFragment : Fragment() {
 
     private fun showNotContentImage(article: Article) {
         binding.apply {
-            if (article.content == null) {
+            if (article.content == null || article.content == removedContent) {
                 notContentImage.isVisible = true
             } else {
-                detailContent.text = article.content.removeRange(article.content.length - 14,article.content.length)
+                var text : String = article.content
+                val targetSymbol = " ["
+                val startRemove = text.lastIndexOf(targetSymbol)
+                text = text.removeRange(startRemove,text.length)
+                val contentText = SpannableString(text)
+                val clickableSpan = object : ClickableSpan(){
+                    override fun onClick(widget: View) {
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(article.url))
+                        startActivity(intent)
+                    }
+                }
+                var start = contentText.lastIndexOf(".")
+                start += if ( start == -1 ){
+                    1
+                } else {
+                    2
+                }
+                contentText.setSpan(clickableSpan,start,contentText.length,Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
+                detailContent.text = contentText
+                detailContent.movementMethod = LinkMovementMethod.getInstance()
             }
         }
     }

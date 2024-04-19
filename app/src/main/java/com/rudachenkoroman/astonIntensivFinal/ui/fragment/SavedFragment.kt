@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import com.rudachenkoroman.astonIntensivFinal.R
 import com.rudachenkoroman.astonIntensivFinal.databinding.FragmentSavedBinding
 
+const val SAVED_FRAGMENT_TAG = "SAVED_FRAGMENT_TAG"
+
 class SavedFragment : Fragment(){
 
     private lateinit var binding: FragmentSavedBinding

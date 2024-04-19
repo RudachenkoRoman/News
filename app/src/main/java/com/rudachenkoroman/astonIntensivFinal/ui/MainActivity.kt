@@ -5,12 +5,15 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.fragment.app.Fragment
 import com.rudachenkoroman.astonIntensivFinal.R
 import com.rudachenkoroman.astonIntensivFinal.databinding.ActivityMainBinding
+import com.rudachenkoroman.astonIntensivFinal.ui.fragment.HEADLINES_FRAGMENT_TAG
 import com.rudachenkoroman.astonIntensivFinal.ui.fragment.HeadlinesFragment
+import com.rudachenkoroman.astonIntensivFinal.ui.fragment.SAVED_FRAGMENT_TAG
+import com.rudachenkoroman.astonIntensivFinal.ui.fragment.SOURCE_FRAGMENT_TAG
 import com.rudachenkoroman.astonIntensivFinal.ui.fragment.SavedFragment
 import com.rudachenkoroman.astonIntensivFinal.ui.fragment.SourcesFragment
+import com.rudachenkoroman.astonIntensivFinal.util.setFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,12 +26,16 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         if (savedInstanceState == null) {
-            replaceFragmentBottomNavigation(HeadlinesFragment())
+            supportFragmentManager.setFragment(
+                R.id.fragmentContainerView,
+                HeadlinesFragment(),
+                HEADLINES_FRAGMENT_TAG
+            )
         }
         buttonSelectionBottomNavigation()
     }
 
-    private fun initSplashScreen(){
+    private fun initSplashScreen() {
         installSplashScreen().setKeepOnScreenCondition { keepSplashOnScreen }
         Handler(Looper.getMainLooper()).postDelayed({ keepSplashOnScreen = false }, delay)
     }
@@ -38,26 +45,31 @@ class MainActivity : AppCompatActivity() {
             bottomNavigation.bottomNavigation.setOnItemSelectedListener {
                 when (it.itemId) {
                     R.id.headlines -> {
-                        replaceFragmentBottomNavigation(HeadlinesFragment())
+                        supportFragmentManager.setFragment(
+                            R.id.fragmentContainerView,
+                            HeadlinesFragment(),
+                            HEADLINES_FRAGMENT_TAG
+                        )
                     }
 
                     R.id.saved -> {
-                        replaceFragmentBottomNavigation(SavedFragment())
+                        supportFragmentManager.setFragment(
+                            R.id.fragmentContainerView,
+                            SavedFragment(),
+                            SAVED_FRAGMENT_TAG
+                        )
                     }
 
                     R.id.sources -> {
-                        replaceFragmentBottomNavigation(SourcesFragment())
+                        supportFragmentManager.setFragment(
+                            R.id.fragmentContainerView,
+                            SourcesFragment(),
+                            SOURCE_FRAGMENT_TAG
+                        )
                     }
                 }
                 true
             }
         }
-    }
-
-    private fun replaceFragmentBottomNavigation(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainerView, fragment)
-            .setReorderingAllowed(true)
-            .commit()
     }
 }

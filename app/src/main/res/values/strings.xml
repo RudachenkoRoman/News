@@ -19,5 +19,4 @@
     <string name="science">Science</string>
     <string name="country">Country</string>
     <string name="delimiter">|</string>
-    <string name="unknown_date">unknown date</string>
 </resources>

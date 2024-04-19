@@ -13,6 +13,7 @@ import com.rudachenkoroman.astonIntensivFinal.databinding.FragmentFiltersBinding
 import java.text.SimpleDateFormat
 import java.util.Locale
 
+const val FILTERS_FRAGMENT_TAG = "FILTERS_FRAGMENT_TAG"
 
 class FiltersFragment : Fragment() {
 

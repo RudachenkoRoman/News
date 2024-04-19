@@ -16,6 +16,8 @@ import com.rudachenkoroman.astonIntensivFinal.model.source.Source
 import com.rudachenkoroman.astonIntensivFinal.presenter.source.SourcePresenter
 import com.rudachenkoroman.astonIntensivFinal.presenter.ViewHome
 
+const val SOURCE_FRAGMENT_TAG = "SOURCE_FRAGMENT_TAG"
+
 class SourcesFragment : Fragment() , ViewHome.SourceView {
 
     private val sourceAdapter by lazy { SourceAdapter() }
@@ -54,7 +56,7 @@ class SourcesFragment : Fragment() , ViewHome.SourceView {
             toolbar.toolbarMain.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.filter -> replaceFragment(FiltersFragment())
-                    R.id.search -> replaceFragment(SearchNewsFragment())
+                    R.id.search -> replaceFragment(SearchFragment())
                 }
                 true
             }

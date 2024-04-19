@@ -10,6 +10,9 @@ import com.google.android.material.tabs.TabLayout
 import com.rudachenkoroman.astonIntensivFinal.R
 import com.rudachenkoroman.astonIntensivFinal.adapter.FragmentPageAdapter
 import com.rudachenkoroman.astonIntensivFinal.databinding.FragmentHeadlinesBinding
+import com.rudachenkoroman.astonIntensivFinal.util.setFragment
+
+const val HEADLINES_FRAGMENT_TAG = "HEADLINES_FRAGMENT_TAG"
 
 class HeadlinesFragment : Fragment() {
     private lateinit var binding: FragmentHeadlinesBinding
@@ -24,33 +27,6 @@ class HeadlinesFragment : Fragment() {
             initPageAdapter()
             tabLayoutMenuClick()
             viewPagerCallback()
-
-//            val searchMenuItem = toolbar.toolbarMain.menu.findItem(R.id.search)
-//            searchMenuItem.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
-//                override fun onMenuItemActionExpand(item: MenuItem): Boolean {
-//                    toolbar.toolbarMain.menu.findItem(R.id.filter).isVisible = false
-//                    tabLayout.isVisible = false
-//                    return true
-//                }
-//
-//                override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
-//                    toolbar.toolbarMain.menu.findItem(R.id.filter).isVisible = true
-//                    tabLayout.isVisible = true
-//                    return true
-//                }
-//            })
-//
-//            val searchView = toolbar.toolbarMain.menu.findItem(R.id.search).actionView as SearchView
-//            searchView.setOnQueryTextListener(object : OnQueryTextListener{
-//                override fun onQueryTextSubmit(query: String?): Boolean {
-//                    return true
-//                }
-//
-//                override fun onQueryTextChange(newText: String?): Boolean {
-//                    return true
-//                }
-//
-//            })
         }
         return binding.root
     }
@@ -100,10 +76,18 @@ class HeadlinesFragment : Fragment() {
             toolbar.toolbarMain.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.filter -> {
-                        replaceFragment(FiltersFragment())
+                        parentFragmentManager.setFragment(
+                            R.id.fragmentContainerView,
+                            FiltersFragment(),
+                            FILTERS_FRAGMENT_TAG
+                        )
                     }
                     R.id.search -> {
-                        replaceFragment(SearchNewsFragment())
+                        parentFragmentManager.setFragment(
+                            R.id.fragmentContainerView,
+                            SearchFragment(),
+                            SEARCH_FRAGMENT_TAG
+                        )
                     }
                 }
                 true
@@ -119,11 +103,4 @@ class HeadlinesFragment : Fragment() {
         }
     }
 
-    private fun replaceFragment(fragment: Fragment) {
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainerView, fragment)
-            .addToBackStack(fragment.tag)
-            .setReorderingAllowed(true)
-            .commit()
-    }
 }

@@ -96,7 +96,8 @@
             <TextView
                 android:id="@+id/detailContent"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:hyphenationFrequency="full"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="28dp"
                 android:layout_marginEnd="16dp"

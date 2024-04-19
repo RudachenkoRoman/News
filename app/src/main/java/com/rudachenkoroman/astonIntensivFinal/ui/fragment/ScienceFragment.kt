@@ -15,14 +15,11 @@ import com.rudachenkoroman.astonIntensivFinal.model.news.Article
 import com.rudachenkoroman.astonIntensivFinal.model.data.NewsDataSource
 import com.rudachenkoroman.astonIntensivFinal.presenter.news.scince.SciencePresenter
 import com.rudachenkoroman.astonIntensivFinal.presenter.ViewHome
+import com.rudachenkoroman.astonIntensivFinal.util.setFragment
 
 class ScienceFragment : Fragment(), ViewHome.View{
 
-//    private val newsAdapter by lazy { NewsAdapter() }
-
-
-    private val newsAdapter = NewsAdapter(onClick = { item -> replaceFragment(item) })
-
+    private val newsAdapter = NewsAdapter(onClick = { item -> onNewsClick(item) })
     private lateinit var binding: FragmentScienceBinding
     private lateinit var presenter: SciencePresenter
 
@@ -48,12 +45,12 @@ class ScienceFragment : Fragment(), ViewHome.View{
         return binding.root
     }
 
-    private fun replaceFragment(item:Article) {
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainerView, DetailNewsFragment())
-            .addToBackStack(tag)
-            .setReorderingAllowed(true)
-            .commit()
+    private fun onNewsClick(item:Article) {
+        parentFragmentManager.setFragment(
+            R.id.fragmentContainerView,
+            DetailNewsFragment.newInstance(item),
+            DETAIL_NEWS_FRAGMENT_TAG
+        )
     }
 
     override fun showProgressBar() {

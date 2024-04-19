@@ -18,7 +18,9 @@ import com.rudachenkoroman.astonIntensivFinal.presenter.search.SearchPresenter
 import com.rudachenkoroman.astonIntensivFinal.util.UtilQueryTextListener
 import com.rudachenkoroman.astonIntensivFinal.presenter.ViewHome
 
-class SearchNewsFragment : Fragment() , ViewHome.View {
+const val SEARCH_FRAGMENT_TAG = "SEARCH_FRAGMENT_TAG"
+
+class SearchFragment : Fragment() , ViewHome.View {
 
     private val newsAdapterSearch by lazy { NewsAdapterSearch() }
 
@@ -85,6 +87,33 @@ class SearchNewsFragment : Fragment() , ViewHome.View {
             }
         }
     }
+
+    //            val searchMenuItem = toolbar.toolbarMain.menu.findItem(R.id.search)
+//            searchMenuItem.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
+//                override fun onMenuItemActionExpand(item: MenuItem): Boolean {
+//                    toolbar.toolbarMain.menu.findItem(R.id.filter).isVisible = false
+//                    tabLayout.isVisible = false
+//                    return true
+//                }
+//
+//                override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
+//                    toolbar.toolbarMain.menu.findItem(R.id.filter).isVisible = true
+//                    tabLayout.isVisible = true
+//                    return true
+//                }
+//            })
+//
+//            val searchView = toolbar.toolbarMain.menu.findItem(R.id.search).actionView as SearchView
+//            searchView.setOnQueryTextListener(object : OnQueryTextListener{
+//                override fun onQueryTextSubmit(query: String?): Boolean {
+//                    return true
+//                }
+//
+//                override fun onQueryTextChange(newText: String?): Boolean {
+//                    return true
+//                }
+//
+//            })
 
     override fun showProgressBar() {
         binding.progressBar.visibility = View.VISIBLE
