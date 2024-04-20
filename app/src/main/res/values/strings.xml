@@ -19,4 +19,6 @@
     <string name="science">Science</string>
     <string name="country">Country</string>
     <string name="delimiter">|</string>
+    <string name="favorite">Add to favorite</string>
+    <string name="not_favorite">Delete to favorite</string>
 </resources>

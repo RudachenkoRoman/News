@@ -15,6 +15,7 @@ import com.rudachenkoroman.astonIntensivFinal.model.data.NewsDataSource
 import com.rudachenkoroman.astonIntensivFinal.model.source.Source
 import com.rudachenkoroman.astonIntensivFinal.presenter.source.SourcePresenter
 import com.rudachenkoroman.astonIntensivFinal.presenter.ViewHome
+import com.rudachenkoroman.astonIntensivFinal.util.setFragment
 
 const val SOURCE_FRAGMENT_TAG = "SOURCE_FRAGMENT_TAG"
 
@@ -55,8 +56,20 @@ class SourcesFragment : Fragment() , ViewHome.SourceView {
         binding.apply {
             toolbar.toolbarMain.setOnMenuItemClickListener {
                 when (it.itemId) {
-                    R.id.filter -> replaceFragment(FiltersFragment())
-                    R.id.search -> replaceFragment(SearchFragment())
+                    R.id.filter -> {
+                        parentFragmentManager.setFragment(
+                            R.id.fragmentContainerView,
+                            FiltersFragment(),
+                            FILTERS_FRAGMENT_TAG
+                        )
+                    }
+                    R.id.search -> {
+                        parentFragmentManager.setFragment(
+                            R.id.fragmentContainerView,
+                            SearchFragment(),
+                            SEARCH_FRAGMENT_TAG
+                        )
+                    }
                 }
                 true
             }
@@ -69,14 +82,6 @@ class SourcesFragment : Fragment() , ViewHome.SourceView {
             toolbar.fragmentName.text = getText(R.string.sources)
             toolbar.toolbarMain.setBackgroundResource(R.color.primary60)
         }
-    }
-
-    private fun replaceFragment(fragment: Fragment) {
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainerView, fragment)
-            .addToBackStack(null)
-            .setReorderingAllowed(true)
-            .commit()
     }
 
     override fun showProgressBar() {

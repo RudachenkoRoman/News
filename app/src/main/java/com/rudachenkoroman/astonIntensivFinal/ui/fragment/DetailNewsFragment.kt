@@ -17,14 +17,19 @@ import com.rudachenkoroman.astonIntensivFinal.R
 import com.rudachenkoroman.astonIntensivFinal.databinding.FragmentDetailNewsBinding
 import com.rudachenkoroman.astonIntensivFinal.model.news.Article
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
+import com.rudachenkoroman.astonIntensivFinal.model.data.NewsDataSource
+import com.rudachenkoroman.astonIntensivFinal.presenter.ViewHome
+import com.rudachenkoroman.astonIntensivFinal.presenter.favorite.FavoritePresenter
 import com.rudachenkoroman.astonIntensivFinal.util.getSerializableCompat
 
 const val BUNDLE_KEY = "BUNDLE_KEY"
 const val DETAIL_NEWS_FRAGMENT_TAG = "USER_DETAILS_FRAGMENT_TAG"
 
-class DetailNewsFragment : Fragment() {
+class DetailNewsFragment : Fragment(), ViewHome.Favorite {
 
     private lateinit var binding: FragmentDetailNewsBinding
+    private lateinit var presenter: FavoritePresenter
     private val removedContent = "[Removed]"
     private val targetSymbol = " ["
 
@@ -33,9 +38,14 @@ class DetailNewsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentDetailNewsBinding.inflate(layoutInflater)
+
+        val dataSource = NewsDataSource(requireContext())
+        presenter = FavoritePresenter(this, dataSource)
+
         toolbarInit()
         backClicked()
         showTitleNews()
+
         return binding.root
     }
 
@@ -45,6 +55,53 @@ class DetailNewsFragment : Fragment() {
         val article = requireArguments().getSerializableCompat(BUNDLE_KEY, Article::class.java)
         if (article != null) {
             setupFields(article)
+            saveFavoriteNews(article)
+            if (article.isFavorite) {
+                binding.toolbar.toolbarMain.menu.findItem(R.id.favorite).setIcon(R.drawable.favorite_checked)
+            } else{
+                binding.toolbar.toolbarMain.menu.findItem(R.id.favorite).setIcon(R.drawable.favorite)
+            }
+        }
+    }
+
+    private fun saveFavoriteNews(article: Article) {
+        binding.apply {
+            toolbar.toolbarMain.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.favorite -> {
+                        if (!article.isFavorite){
+                            toolbar.toolbarMain.menu.findItem(R.id.favorite).setIcon(R.drawable.favorite_checked)
+                            article.isFavorite = true
+                            presenter.saveArticle(article)
+                            snackbarAddFavorite()
+                        } else{
+                            toolbar.toolbarMain.menu.findItem(R.id.favorite).setIcon(R.drawable.favorite)
+                            article.isFavorite = false
+                            presenter.deleteArticle(article)
+                            snackbarDeleteFavorite()
+                        }
+                    }
+                }
+                true
+            }
+        }
+    }
+
+    private fun snackbarAddFavorite(){
+        view?.let { it1 ->
+            Snackbar.make(
+                it1, R.string.favorite,
+                Snackbar.LENGTH_LONG
+            ).show()
+        }
+    }
+
+    private fun snackbarDeleteFavorite() {
+        view?.let { it1 ->
+            Snackbar.make(
+                it1, R.string.not_favorite,
+                Snackbar.LENGTH_LONG
+            ).show()
         }
     }
 
@@ -84,7 +141,10 @@ class DetailNewsFragment : Fragment() {
 
     private fun clickToLinkNews(article: Article) {
         var text: String = article.content
-        val startRemove = text.lastIndexOf(targetSymbol)
+        var startRemove = text.lastIndexOf(targetSymbol)
+        if (startRemove == -1) {
+            startRemove = text.length - 1
+        }
         text = text.removeRange(startRemove, text.length)
         val contentText = SpannableString(text)
         val clickableSpan = object : ClickableSpan() {
@@ -142,5 +202,9 @@ class DetailNewsFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun showArticles(articles: List<Article>) {
+
     }
 }

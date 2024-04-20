@@ -1,26 +1,29 @@
 package com.rudachenkoroman.astonIntensivFinal.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.rudachenkoroman.astonIntensivFinal.R
+import com.rudachenkoroman.astonIntensivFinal.databinding.ItemNewsSearchBinding
 import com.rudachenkoroman.astonIntensivFinal.model.news.Article
 
-class NewsAdapterSearch: RecyclerView.Adapter<NewsAdapterSearch.ArticleViewHolder>() {
+class NewsAdapterSearch(private val onClickSearch: (item: Article) -> Unit) : ListAdapter<Article, NewsAdapterSearch.ArticleViewHolder>(UserDiffUtil) {
 
-    inner class ArticleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-    private lateinit var articleImageSearch : ImageView
-    private lateinit var articleChannelSearch : ImageView
-    private lateinit var articleTitleSearch : TextView
-    private lateinit var articleDescriptionSearch : TextView
+    inner class ArticleViewHolder(private val binding: ItemNewsSearchBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(article: Article) {
+            Glide.with(itemView.context)
+                .load(article.urlToImage)
+                .placeholder(R.drawable.placeholder_news_item)
+                .into(binding.articleImageSearch)
+            binding.articleTitleSearch.text = article.source.name
+            binding.articleDescriptionSearch.text = article.title
+        }
+    }
 
-    private val differCallback = object : DiffUtil.ItemCallback<Article>() {
+    object UserDiffUtil : DiffUtil.ItemCallback<Article>() {
         override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
             return oldItem.url == newItem.url
         }
@@ -30,45 +33,22 @@ class NewsAdapterSearch: RecyclerView.Adapter<NewsAdapterSearch.ArticleViewHolde
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
-        return ArticleViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_news_search,parent,false)
-        )
+    override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
+        holder.bind(getItem(position))
     }
 
-    val  differ = AsyncListDiffer(this, differCallback)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = ItemNewsSearchBinding.inflate(inflater,parent,false)
+        val viewHolder = ArticleViewHolder(binding)
+        viewHolder.itemView.setOnClickListener {
+            val item = getItem(viewHolder.adapterPosition)
+            onClickSearch(item)
+        }
+        return viewHolder
+    }
 
     override fun getItemCount(): Int {
-        return differ.currentList.size
-    }
-
-    override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
-
-        val article = differ.currentList[position]
-        articleImageSearch = holder.itemView.findViewById(R.id.articleImageSearch)
-        articleChannelSearch = holder.itemView.findViewById(R.id.articleChannelSearch)
-        articleTitleSearch = holder.itemView.findViewById(R.id.articleTitleSearch)
-        articleDescriptionSearch = holder.itemView.findViewById(R.id.articleDescriptionSearch)
-
-        with(article){
-            Glide.with(holder.itemView.context)
-                .load(this.urlToImage)
-                .placeholder(R.drawable.placeholder_news_item)
-                .into(articleImageSearch)
-            articleTitleSearch.text = article.source.name
-            articleDescriptionSearch.text = article.title
-
-            holder.itemView.setOnClickListener {
-                onItemClickListener?.let { click ->
-                    click(this)
-                }
-            }
-        }
-    }
-
-    private var onItemClickListener: ((Article) -> Unit)? = null
-
-    fun setOnclickListener(listener: (Article) -> Unit) {
-        onItemClickListener = listener
+        return currentList.size
     }
 }

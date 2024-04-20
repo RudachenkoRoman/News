@@ -9,10 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.lifecycle.LifecycleOwner
-import com.rudachenkoroman.astonIntensivFinal.R
-import com.rudachenkoroman.astonIntensivFinal.model.news.Article
-import com.rudachenkoroman.astonIntensivFinal.ui.fragment.DETAIL_NEWS_FRAGMENT_TAG
-import com.rudachenkoroman.astonIntensivFinal.ui.fragment.DetailNewsFragment
 import java.io.Serializable
 
 fun <T : Serializable> Bundle.getSerializableCompat(key: String, clazz: Class<T>): T? {

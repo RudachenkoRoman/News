@@ -19,7 +19,7 @@ import com.rudachenkoroman.astonIntensivFinal.util.setFragment
 
 class GeneralFragment : Fragment(), ViewHome.View {
 
-    private val newsAdapter by lazy { NewsAdapter(onClick = { item -> onNewsClick(item) }) }
+    private val newsAdapter by lazy { NewsAdapter(onClickNews = { item -> onNewsClick(item) }) }
     private lateinit var binding: FragmentGeneralBinding
     private lateinit var presenter: GeneralPresenter
 
@@ -32,9 +32,7 @@ class GeneralFragment : Fragment(), ViewHome.View {
         val datasource = NewsDataSource(requireContext())
         presenter = GeneralPresenter(this,datasource)
         presenter.requestAll()
-
         createRecycle()
-
         return binding.root
     }
 
@@ -63,7 +61,7 @@ class GeneralFragment : Fragment(), ViewHome.View {
     }
 
     override fun showFailure(message: String) {
-        Toast.makeText(requireActivity(), "Error", Toast.LENGTH_LONG).show()
+        Toast.makeText(requireActivity(), message, Toast.LENGTH_LONG).show()
     }
 
     override fun hideProgressBar() {

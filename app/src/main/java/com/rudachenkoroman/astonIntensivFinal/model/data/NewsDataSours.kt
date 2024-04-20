@@ -3,12 +3,16 @@ package com.rudachenkoroman.astonIntensivFinal.model.data
 import android.content.Context
 import com.rudachenkoroman.astonIntensivFinal.api.RetrofitInstance
 import com.rudachenkoroman.astonIntensivFinal.model.db.ArticleDatabase
+import com.rudachenkoroman.astonIntensivFinal.model.news.Article
+import com.rudachenkoroman.astonIntensivFinal.presenter.favorite.FavoriteHome
 import com.rudachenkoroman.astonIntensivFinal.presenter.news.NewsHome
 import com.rudachenkoroman.astonIntensivFinal.presenter.search.SearchHome
 import com.rudachenkoroman.astonIntensivFinal.presenter.source.SourceHome
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class NewsDataSource(context: Context) {
 
@@ -90,29 +94,28 @@ class NewsDataSource(context: Context) {
             }
         }
     }
-//
-//    fun saveArticle(article: Article) {
-//        GlobalScope.launch(Dispatchers.Main) {
-//            newsRepository.updateInsert(article)
-//        }
-//    }
-//
-//    fun getAllArticle(callback: FavoriteHome.Presenter) {
-//        var allArticles: List<Article>
-//        CoroutineScope(Dispatchers.IO).launch {
-//            allArticles = newsRepository.getAll()
-//
-//            withContext(Dispatchers.Main) {
-//                callback.onSuccess(allArticles)
-//            }
-//        }
-//    }
-//
-//    fun deleArticle(article: Article?) {
-//        GlobalScope.launch(Dispatchers.Main) {
-//            article?.let { articleSafe ->
-//                newsRepository.delete(articleSafe)
-//            }
-//        }
-//    }
+
+    fun saveArticle(article: Article) {
+        GlobalScope.launch(Dispatchers.Main) {
+            newsRepository.updateInsert(article)
+        }
+    }
+
+    fun getAllArticle(callback: FavoriteHome.Presenter) {
+        var allArticles: List<Article>
+        CoroutineScope(Dispatchers.IO).launch {
+            allArticles = newsRepository.getAll()
+            withContext(Dispatchers.Main) {
+                callback.onSuccess(allArticles)
+            }
+        }
+    }
+
+    fun deleteArticle(article: Article?) {
+        GlobalScope.launch(Dispatchers.Main) {
+            article?.let { articleSafe ->
+                newsRepository.delete(articleSafe)
+            }
+        }
+    }
 }

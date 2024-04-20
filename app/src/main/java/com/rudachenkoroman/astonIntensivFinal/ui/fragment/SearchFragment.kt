@@ -10,6 +10,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rudachenkoroman.astonIntensivFinal.R
+import com.rudachenkoroman.astonIntensivFinal.adapter.NewsAdapter
 import com.rudachenkoroman.astonIntensivFinal.adapter.NewsAdapterSearch
 import com.rudachenkoroman.astonIntensivFinal.databinding.FragmentSearchNewsBinding
 import com.rudachenkoroman.astonIntensivFinal.model.data.NewsDataSource
@@ -17,13 +18,13 @@ import com.rudachenkoroman.astonIntensivFinal.model.news.Article
 import com.rudachenkoroman.astonIntensivFinal.presenter.search.SearchPresenter
 import com.rudachenkoroman.astonIntensivFinal.util.UtilQueryTextListener
 import com.rudachenkoroman.astonIntensivFinal.presenter.ViewHome
+import com.rudachenkoroman.astonIntensivFinal.util.setFragment
 
 const val SEARCH_FRAGMENT_TAG = "SEARCH_FRAGMENT_TAG"
 
 class SearchFragment : Fragment() , ViewHome.View {
 
-    private val newsAdapterSearch by lazy { NewsAdapterSearch() }
-
+    private val newsAdapterSearch by lazy { NewsAdapterSearch(onClickSearch = { item -> onClickSearch(item) }) }
     private lateinit var binding: FragmentSearchNewsBinding
     private lateinit var presenter: SearchPresenter
 
@@ -43,6 +44,7 @@ class SearchFragment : Fragment() , ViewHome.View {
         return binding.root
     }
 
+
     private fun createRecycle() {
         with(binding.searchRecyclerView) {
             adapter = newsAdapterSearch
@@ -53,6 +55,14 @@ class SearchFragment : Fragment() , ViewHome.View {
                 )
             )
         }
+    }
+
+    private fun onClickSearch(item:Article) {
+        parentFragmentManager.setFragment(
+            R.id.fragmentContainerView,
+            DetailNewsFragment.newInstance(item),
+            DETAIL_NEWS_FRAGMENT_TAG
+        )
     }
 
     private fun search() {
@@ -128,7 +138,7 @@ class SearchFragment : Fragment() , ViewHome.View {
     }
 
     override fun showArticles(articles: List<Article>) {
-        newsAdapterSearch.differ.submitList(articles.toList())
+        newsAdapterSearch.submitList(articles.toList())
     }
 
 }

@@ -10,7 +10,7 @@ import com.rudachenkoroman.astonIntensivFinal.R
 import com.rudachenkoroman.astonIntensivFinal.databinding.ItemNewsBinding
 import com.rudachenkoroman.astonIntensivFinal.model.news.Article
 
-class NewsAdapter(private val onClick: (item: Article) -> Unit) : ListAdapter <Article, NewsAdapter.ArticleViewHolder>(UserDiffUtil) {
+class NewsAdapter(private val onClickNews: (item: Article) -> Unit) : ListAdapter <Article, NewsAdapter.ArticleViewHolder>(UserDiffUtil) {
 
     inner class ArticleViewHolder(private val binding: ItemNewsBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(article: Article) {
@@ -33,7 +33,6 @@ class NewsAdapter(private val onClick: (item: Article) -> Unit) : ListAdapter <A
         }
     }
 
-
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
@@ -44,7 +43,7 @@ class NewsAdapter(private val onClick: (item: Article) -> Unit) : ListAdapter <A
         val viewHolder = ArticleViewHolder(binding)
         viewHolder.itemView.setOnClickListener {
             val item = getItem(viewHolder.adapterPosition)
-            onClick(item)
+            onClickNews(item)
         }
         return viewHolder
     }
