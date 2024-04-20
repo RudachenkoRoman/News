@@ -19,7 +19,7 @@ import com.rudachenkoroman.astonIntensivFinal.util.setFragment
 
 class BusinessFragment : Fragment(), ViewHome.View {
 
-    private val newsAdapter = NewsAdapter(onClick = { item -> onNewsClick(item) })
+    private val newsAdapter = NewsAdapter(onClickNews = { item -> onNewsClick(item) })
     private lateinit var binding: FragmentBusinessBinding
     private lateinit var presenter: BusinessPresenter
 

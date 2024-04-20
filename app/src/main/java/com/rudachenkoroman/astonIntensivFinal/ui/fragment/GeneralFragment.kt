@@ -19,7 +19,7 @@ import com.rudachenkoroman.astonIntensivFinal.util.setFragment
 
 class GeneralFragment : Fragment(), ViewHome.View {
 
-    private val newsAdapter by lazy { NewsAdapter(onClick = { item -> onNewsClick(item) }) }
+    private val newsAdapter by lazy { NewsAdapter(onClickNews = { item -> onNewsClick(item) }) }
     private lateinit var binding: FragmentGeneralBinding
     private lateinit var presenter: GeneralPresenter
 

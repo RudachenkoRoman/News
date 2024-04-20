@@ -84,7 +84,10 @@ class DetailNewsFragment : Fragment() {
 
     private fun clickToLinkNews(article: Article) {
         var text: String = article.content
-        val startRemove = text.lastIndexOf(targetSymbol)
+        var startRemove = text.lastIndexOf(targetSymbol)
+        if (startRemove == -1){
+            startRemove = text.length - 1
+        }
         text = text.removeRange(startRemove, text.length)
         val contentText = SpannableString(text)
         val clickableSpan = object : ClickableSpan() {
