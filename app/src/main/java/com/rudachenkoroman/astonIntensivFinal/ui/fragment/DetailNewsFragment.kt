@@ -32,6 +32,7 @@ class DetailNewsFragment : Fragment(), ViewHome.Favorite {
     private lateinit var presenter: FavoritePresenter
     private val removedContent = "[Removed]"
     private val targetSymbol = " ["
+    private val target =  "target"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
