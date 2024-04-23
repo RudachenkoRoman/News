@@ -32,8 +32,6 @@ class DetailNewsFragment : Fragment(), ViewHome.Favorite {
     private lateinit var presenter: FavoritePresenter
     private val removedContent = "[Removed]"
     private val targetSymbol = " ["
-    private val target =  "target"
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -57,11 +55,16 @@ class DetailNewsFragment : Fragment(), ViewHome.Favorite {
         if (article != null) {
             setupFields(article)
             saveFavoriteNews(article)
-            if (article.isFavorite) {
-                binding.toolbar.toolbarMain.menu.findItem(R.id.favorite).setIcon(R.drawable.favorite_checked)
-            } else{
-                binding.toolbar.toolbarMain.menu.findItem(R.id.favorite).setIcon(R.drawable.favorite)
-            }
+            saveIconFavorite(article)
+        }
+    }
+
+    private fun saveIconFavorite(article: Article) {
+        if (article.isFavorite) {
+            binding.toolbar.toolbarMain.menu.findItem(R.id.favorite)
+                .setIcon(R.drawable.favorite_checked)
+        } else {
+            binding.toolbar.toolbarMain.menu.findItem(R.id.favorite).setIcon(R.drawable.favorite)
         }
     }
 
@@ -70,16 +73,18 @@ class DetailNewsFragment : Fragment(), ViewHome.Favorite {
             toolbar.toolbarMain.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.favorite -> {
-                        if (!article.isFavorite){
-                            toolbar.toolbarMain.menu.findItem(R.id.favorite).setIcon(R.drawable.favorite_checked)
-                            article.isFavorite = true
-                            presenter.saveArticle(article)
-                            snackbarAddFavorite()
-                        } else{
-                            toolbar.toolbarMain.menu.findItem(R.id.favorite).setIcon(R.drawable.favorite)
+                        if (article.isFavorite) {
+                            toolbar.toolbarMain.menu.findItem(R.id.favorite)
+                                .setIcon(R.drawable.favorite)
                             article.isFavorite = false
                             presenter.deleteArticle(article)
                             snackbarDeleteFavorite()
+                        } else {
+                            toolbar.toolbarMain.menu.findItem(R.id.favorite)
+                                .setIcon(R.drawable.favorite_checked)
+                            article.isFavorite = true
+                            presenter.saveArticle(article)
+                            snackbarAddFavorite()
                         }
                     }
                 }
@@ -88,10 +93,10 @@ class DetailNewsFragment : Fragment(), ViewHome.Favorite {
         }
     }
 
-    private fun snackbarAddFavorite(){
+    private fun snackbarAddFavorite() {
         view?.let { it1 ->
             Snackbar.make(
-                it1, R.string.favorite,
+                it1, R.string.add_to_saved,
                 Snackbar.LENGTH_LONG
             ).show()
         }
@@ -100,7 +105,7 @@ class DetailNewsFragment : Fragment(), ViewHome.Favorite {
     private fun snackbarDeleteFavorite() {
         view?.let { it1 ->
             Snackbar.make(
-                it1, R.string.not_favorite,
+                it1, R.string.delete_in_saved,
                 Snackbar.LENGTH_LONG
             ).show()
         }
@@ -134,6 +139,7 @@ class DetailNewsFragment : Fragment(), ViewHome.Favorite {
         binding.apply {
             if (article.content == null || article.content == removedContent) {
                 notContentImage.isVisible = true
+                toolbar.toolbarMain.menu.findItem(R.id.favorite).isVisible = false
             } else {
                 clickToLinkNews(article)
             }

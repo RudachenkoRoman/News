@@ -8,6 +8,11 @@ import com.rudachenkoroman.astonIntensivFinal.presenter.favorite.FavoriteHome
 import com.rudachenkoroman.astonIntensivFinal.presenter.news.NewsHome
 import com.rudachenkoroman.astonIntensivFinal.presenter.search.SearchHome
 import com.rudachenkoroman.astonIntensivFinal.presenter.source.SourceHome
+import com.rudachenkoroman.astonIntensivFinal.ui.fragment.BusinessFragment
+import com.rudachenkoroman.astonIntensivFinal.ui.fragment.DetailSourceFragment
+import com.rudachenkoroman.astonIntensivFinal.ui.fragment.GeneralFragment
+import com.rudachenkoroman.astonIntensivFinal.ui.fragment.ScienceFragment
+import com.rudachenkoroman.astonIntensivFinal.ui.fragment.SourcesFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -21,7 +26,7 @@ class NewsDataSource(context: Context) {
 
     fun getGeneralNews(callback: NewsHome.Presenter) {
         GlobalScope.launch(Dispatchers.Main) {
-            val response = RetrofitInstance.api.getGeneralNews("us")
+            val response = GeneralFragment.requestGeneralNews()
             if (response.isSuccessful) {
                 response.body()?.let { newsResponse ->
                     callback.onSuccess(newsResponse)
@@ -36,7 +41,7 @@ class NewsDataSource(context: Context) {
 
     fun getBusinessNews(callback: NewsHome.Presenter) {
         GlobalScope.launch(Dispatchers.Main) {
-            val response = RetrofitInstance.api.getBusinessNews("us")
+            val response = BusinessFragment.requestBusinessNews()
             if (response.isSuccessful) {
                 response.body()?.let { newsResponse ->
                     callback.onSuccess(newsResponse)
@@ -51,7 +56,7 @@ class NewsDataSource(context: Context) {
 
     fun getScienceNews(callback: NewsHome.Presenter) {
         GlobalScope.launch(Dispatchers.Main) {
-            val response = RetrofitInstance.api.getScienceNews("us")
+            val response = ScienceFragment.requestScienceNews()
             if (response.isSuccessful) {
                 response.body()?.let { newsResponse ->
                     callback.onSuccess(newsResponse)
@@ -64,10 +69,24 @@ class NewsDataSource(context: Context) {
         }
     }
 
+    fun getDetailSourceNews(callback: NewsHome.Presenter) {
+        GlobalScope.launch(Dispatchers.Main) {
+            val response = DetailSourceFragment.requestDetailSourceNews()
+            if (response.isSuccessful) {
+                response.body()?.let { newsResponse ->
+                    callback.onSuccess(newsResponse)
+                }
+                callback.onComplete()
+            } else {
+                callback.onError(response.message())
+                callback.onComplete()
+            }
+        }
+    }
 
     fun getSourceNews(callback: SourceHome.Presenter) {
         GlobalScope.launch(Dispatchers.Main) {
-            val response = RetrofitInstance.api.getSourceNews("us")
+            val response = SourcesFragment.requestSource()
             if (response.isSuccessful) {
                 response.body()?.let { sourceResponse ->
                     callback.onSuccess(sourceResponse)
@@ -82,7 +101,7 @@ class NewsDataSource(context: Context) {
 
     fun searchNews(term: String, callback: SearchHome.Presenter) {
         GlobalScope.launch(Dispatchers.Main) {
-            val response = RetrofitInstance.api.searchNews(term)
+            val response = RetrofitInstance.api.getSearchNews(term)
             if (response.isSuccessful) {
                 response.body()?.let { newsResponse ->
                     callback.onSuccess(newsResponse)

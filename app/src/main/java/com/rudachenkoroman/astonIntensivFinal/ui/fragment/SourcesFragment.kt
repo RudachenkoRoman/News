@@ -10,19 +10,23 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rudachenkoroman.astonIntensivFinal.R
 import com.rudachenkoroman.astonIntensivFinal.adapter.SourceAdapter
+import com.rudachenkoroman.astonIntensivFinal.api.RetrofitInstance
 import com.rudachenkoroman.astonIntensivFinal.databinding.FragmentSourcesBinding
 import com.rudachenkoroman.astonIntensivFinal.model.data.NewsDataSource
+import com.rudachenkoroman.astonIntensivFinal.model.news.NewsResponse
 import com.rudachenkoroman.astonIntensivFinal.model.source.Source
+import com.rudachenkoroman.astonIntensivFinal.model.source.SourceResponse
 import com.rudachenkoroman.astonIntensivFinal.presenter.source.SourcePresenter
 import com.rudachenkoroman.astonIntensivFinal.presenter.ViewHome
+import com.rudachenkoroman.astonIntensivFinal.ui.fragment.DetailSourceFragment.Companion.DETAIL_SOURCE_FRAGMENT_TAG
 import com.rudachenkoroman.astonIntensivFinal.util.setFragment
+import retrofit2.Response
 
 const val SOURCE_FRAGMENT_TAG = "SOURCE_FRAGMENT_TAG"
 
 class SourcesFragment : Fragment() , ViewHome.SourceView {
 
-    private val sourceAdapter by lazy { SourceAdapter() }
-
+    private val sourceAdapter by lazy { SourceAdapter(onClickSource = { item -> onSourceClick(item) }) }
     private lateinit var binding: FragmentSourcesBinding
     private lateinit var presenter: SourcePresenter
 
@@ -31,15 +35,17 @@ class SourcesFragment : Fragment() , ViewHome.SourceView {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSourcesBinding.inflate(layoutInflater)
-        binding.apply {
-            toolbarInit()
-            toolbarMenuItemClick()
-        }
-
         val datasource = NewsDataSource(requireContext())
         presenter = SourcePresenter(this,datasource)
         presenter.requestAll()
 
+        toolbarInit()
+        toolbarMenuItemClick()
+        createRecycle()
+        return binding.root
+    }
+
+    private fun createRecycle() {
         with(binding.sourceRecyclerView) {
             adapter = sourceAdapter
             layoutManager = LinearLayoutManager(requireContext())
@@ -49,7 +55,14 @@ class SourcesFragment : Fragment() , ViewHome.SourceView {
                 )
             )
         }
-        return binding.root
+    }
+
+    private fun onSourceClick(item: Source){
+        parentFragmentManager.setFragment(
+            R.id.fragmentContainerView,
+            DetailSourceFragment.newInstance(item),
+            DETAIL_SOURCE_FRAGMENT_TAG
+        )
     }
 
     private fun toolbarMenuItemClick(){
@@ -97,6 +110,15 @@ class SourcesFragment : Fragment() , ViewHome.SourceView {
     }
 
     override fun showSource(source: List<Source>) {
-        sourceAdapter.differ.submitList(source.toList())
+        sourceAdapter.submitList(source.toList())
     }
+
+    companion object {
+        suspend fun requestSource(): Response<SourceResponse> {
+            return RetrofitInstance.api.getSource(COUNTY_CODE_US)
+        }
+        private const val COUNTY_CODE_US = "us"
+    }
+
+
 }

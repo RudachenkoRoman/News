@@ -19,6 +19,8 @@
     <string name="science">Science</string>
     <string name="country">Country</string>
     <string name="delimiter">|</string>
-    <string name="favorite">Add to favorite</string>
-    <string name="not_favorite">Delete to favorite</string>
+    <string name="add_to_saved">Add to saved</string>
+    <string name="delete_in_saved">Delete in saved</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

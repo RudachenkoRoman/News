@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.rudachenkoroman.astonIntensivFinal.R
 import com.rudachenkoroman.astonIntensivFinal.databinding.ItemNewsBinding
 import com.rudachenkoroman.astonIntensivFinal.model.news.Article
+import com.rudachenkoroman.astonIntensivFinal.model.source.Source
 
 class NewsAdapter(private val onClickNews: (item: Article) -> Unit) : ListAdapter <Article, NewsAdapter.ArticleViewHolder>(UserDiffUtil) {
 

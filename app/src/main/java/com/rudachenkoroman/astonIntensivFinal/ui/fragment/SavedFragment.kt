@@ -17,7 +17,6 @@ import com.rudachenkoroman.astonIntensivFinal.presenter.favorite.FavoritePresent
 import com.rudachenkoroman.astonIntensivFinal.util.setFragment
 
 const val SAVED_FRAGMENT_TAG = "SAVED_FRAGMENT_TAG"
-
 class SavedFragment : Fragment(), ViewHome.Favorite{
 
     private val newsAdapter by lazy { NewsAdapter(onClickNews = { item -> onNewsClick(item) }) }

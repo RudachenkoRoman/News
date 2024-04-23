@@ -10,12 +10,15 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rudachenkoroman.astonIntensivFinal.R
 import com.rudachenkoroman.astonIntensivFinal.adapter.NewsAdapter
+import com.rudachenkoroman.astonIntensivFinal.api.RetrofitInstance
 import com.rudachenkoroman.astonIntensivFinal.databinding.FragmentBusinessBinding
 import com.rudachenkoroman.astonIntensivFinal.model.news.Article
 import com.rudachenkoroman.astonIntensivFinal.model.data.NewsDataSource
+import com.rudachenkoroman.astonIntensivFinal.model.news.NewsResponse
 import com.rudachenkoroman.astonIntensivFinal.presenter.news.business.BusinessPresenter
 import com.rudachenkoroman.astonIntensivFinal.presenter.ViewHome
 import com.rudachenkoroman.astonIntensivFinal.util.setFragment
+import retrofit2.Response
 
 class BusinessFragment : Fragment(), ViewHome.View {
 
@@ -72,5 +75,13 @@ class BusinessFragment : Fragment(), ViewHome.View {
 
     override fun showArticles(articles: List<Article>) {
         newsAdapter.submitList(articles.toList())
+    }
+
+    companion object {
+        suspend fun requestBusinessNews(): Response<NewsResponse> {
+            return RetrofitInstance.api.getNews(COUNTY_CODE_US, BUSINESS)
+        }
+        private const val COUNTY_CODE_US = "us"
+        private const val BUSINESS = "business"
     }
 }

@@ -10,7 +10,6 @@ import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rudachenkoroman.astonIntensivFinal.R
-import com.rudachenkoroman.astonIntensivFinal.adapter.NewsAdapter
 import com.rudachenkoroman.astonIntensivFinal.adapter.NewsAdapterSearch
 import com.rudachenkoroman.astonIntensivFinal.databinding.FragmentSearchNewsBinding
 import com.rudachenkoroman.astonIntensivFinal.model.data.NewsDataSource
@@ -21,7 +20,6 @@ import com.rudachenkoroman.astonIntensivFinal.presenter.ViewHome
 import com.rudachenkoroman.astonIntensivFinal.util.setFragment
 
 const val SEARCH_FRAGMENT_TAG = "SEARCH_FRAGMENT_TAG"
-
 class SearchFragment : Fragment() , ViewHome.View {
 
     private val newsAdapterSearch by lazy { NewsAdapterSearch(onClickSearch = { item -> onClickSearch(item) }) }
@@ -43,7 +41,6 @@ class SearchFragment : Fragment() , ViewHome.View {
         search()
         return binding.root
     }
-
 
     private fun createRecycle() {
         with(binding.searchRecyclerView) {

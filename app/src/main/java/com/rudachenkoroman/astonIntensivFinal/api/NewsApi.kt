@@ -7,54 +7,42 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface NewsApi {
-
     @GET("v2/top-headlines")
-    suspend fun getGeneralNews(
+    suspend fun getNews(
         @Query("country")
-        countryCode: String = "us",
+        countryCode: String,
         @Query("category")
-        category: String = "general",
-        @Query("apiKey")
-        api: String = API_KEY_TWO,
-    ): Response<NewsResponse>
-
-    @GET("v2/top-headlines")
-    suspend fun getBusinessNews(
-        @Query("country")
-        countryCode: String = "us",
-        @Query("category")
-        category: String = "business",
-        @Query("apiKey")
-        api: String = API_KEY_TWO,
-    ): Response<NewsResponse>
-
-    @GET("v2/top-headlines")
-    suspend fun getScienceNews(
-        @Query("country")
-        countryCode: String = "us",
-        @Query("category")
-        category: String = "science",
+        category: String,
         @Query("apiKey")
         api: String = API_KEY_TWO,
     ): Response<NewsResponse>
 
     @GET("/v2/top-headlines/sources")
-    suspend fun getSourceNews(
+    suspend fun getSource(
         @Query("country")
-        countryCode: String = "us",
+        countryCode: String,
         @Query("apiKey")
         api: String = API_KEY_TWO,
     ): Response<SourceResponse>
 
-
     @GET("/v2/everything")
-    suspend fun searchNews(
+    suspend fun getDetailSourceNews(
         @Query("q")
         searchQuery: String,
         @Query("searchIn")
+        searchIn: String ,
+        @Query("sources")
+        sources: String,
+        @Query("apiKey")
+        apiKey: String = API_KEY_TWO,
+    ): Response<NewsResponse>
+
+    @GET("/v2/everything")
+    suspend fun getSearchNews(
+        @Query("q")
+        searchQuery: String = "us",
+        @Query("searchIn")
         searchIn: String = "title",
-        @Query("page")
-        pageNumber: Int = 1,
         @Query("apiKey")
         apiKey: String = API_KEY_TWO
     ): Response<NewsResponse>
@@ -62,6 +50,7 @@ interface NewsApi {
     companion object{
         private const val API_KEY_ONE = "6278be60e04a4607811df26a69b236a8"
         private const val API_KEY_TWO = "0d33c096900c4c4097ce0ba7700cb02e"
+        private const val API_KEY_THREE ="0300182d74954aafb0a63224ff3f5723"
         private const val QUERY_PAGE_SIZE = "20"
     }
 }
