@@ -37,7 +37,6 @@ class DetailSourceFragment : Fragment(), ViewHome.View {
         val datasource = NewsDataSource(requireContext())
         presenter = SourceNewsPresenter(this,datasource)
         presenter.requestAll()
-        toolbarInit()
         backClicked()
         createRecycle()
         return binding.root
@@ -48,13 +47,14 @@ class DetailSourceFragment : Fragment(), ViewHome.View {
         val sources = requireArguments().getSerializableCompat(BUNDLE_KEY_SOURCE, Source::class.java)
         if (sources != null) {
             requestSourceId = sources.id
+            toolbarInit(sources)
         }
     }
 
-    private fun toolbarInit() {
+    private fun toolbarInit(source: Source) {
         binding.apply {
             toolbar.toolbarMain.inflateMenu(R.menu.toolbar_menu_main)
-            toolbar.fragmentName.text = getText(R.string.sources)
+            toolbar.fragmentName.text = source.name
             toolbar.toolbarMain.setBackgroundResource(R.color.primary60)
         }
     }

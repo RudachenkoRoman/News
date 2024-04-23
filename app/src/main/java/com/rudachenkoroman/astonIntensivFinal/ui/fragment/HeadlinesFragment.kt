@@ -9,6 +9,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.rudachenkoroman.astonIntensivFinal.R
 import com.rudachenkoroman.astonIntensivFinal.adapter.FragmentPageAdapter
+import com.rudachenkoroman.astonIntensivFinal.api.NewsApi
 import com.rudachenkoroman.astonIntensivFinal.databinding.FragmentHeadlinesBinding
 import com.rudachenkoroman.astonIntensivFinal.util.setFragment
 
@@ -48,6 +49,11 @@ class HeadlinesFragment : Fragment() {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     if (tab != null) {
                         viewPager2.currentItem = tab.position
+                    }
+                    when(viewPager2.currentItem){
+                        0-> NewsApi.requestCategorySearch(GeneralFragment.GENERAL)
+                        1-> NewsApi.requestCategorySearch(BusinessFragment.BUSINESS)
+                        2-> NewsApi.requestCategorySearch(ScienceFragment.SCIENCE)
                     }
                 }
 

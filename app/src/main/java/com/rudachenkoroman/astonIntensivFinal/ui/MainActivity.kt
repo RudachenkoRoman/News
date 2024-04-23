@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.rudachenkoroman.astonIntensivFinal.R
+import com.rudachenkoroman.astonIntensivFinal.api.NewsApi
 import com.rudachenkoroman.astonIntensivFinal.databinding.ActivityMainBinding
 import com.rudachenkoroman.astonIntensivFinal.ui.fragment.HEADLINES_FRAGMENT_TAG
 import com.rudachenkoroman.astonIntensivFinal.ui.fragment.HeadlinesFragment

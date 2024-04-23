@@ -35,7 +35,11 @@ class ScienceFragment : Fragment(), ViewHome.View{
         val datasource = NewsDataSource(requireContext())
         presenter = SciencePresenter(this,datasource)
         presenter.requestAll()
+        createRecycle()
+        return binding.root
+    }
 
+    private fun createRecycle() {
         with(binding.scienceRecyclerView) {
             adapter = newsAdapter
             layoutManager = LinearLayoutManager(requireContext())
@@ -45,7 +49,6 @@ class ScienceFragment : Fragment(), ViewHome.View{
                 )
             )
         }
-        return binding.root
     }
 
     private fun onNewsClick(item:Article) {
@@ -77,7 +80,7 @@ class ScienceFragment : Fragment(), ViewHome.View{
             return RetrofitInstance.api.getNews(COUNTY_CODE_US, SCIENCE)
         }
         private const val COUNTY_CODE_US = "us"
-        private const val SCIENCE = "science"
+        const val SCIENCE = "science"
     }
 
 }

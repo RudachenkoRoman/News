@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rudachenkoroman.astonIntensivFinal.R
 import com.rudachenkoroman.astonIntensivFinal.adapter.NewsAdapter
+import com.rudachenkoroman.astonIntensivFinal.api.NewsApi
 import com.rudachenkoroman.astonIntensivFinal.api.RetrofitInstance
 import com.rudachenkoroman.astonIntensivFinal.databinding.FragmentBusinessBinding
 import com.rudachenkoroman.astonIntensivFinal.model.news.Article
@@ -31,13 +32,10 @@ class BusinessFragment : Fragment(), ViewHome.View {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentBusinessBinding.inflate(layoutInflater)
-
         val datasource = NewsDataSource(requireContext())
         presenter = BusinessPresenter(this,datasource)
         presenter.requestAll()
-
         createRecycle()
-
         return binding.root
     }
 
@@ -82,6 +80,6 @@ class BusinessFragment : Fragment(), ViewHome.View {
             return RetrofitInstance.api.getNews(COUNTY_CODE_US, BUSINESS)
         }
         private const val COUNTY_CODE_US = "us"
-        private const val BUSINESS = "business"
+        const val BUSINESS = "business"
     }
 }

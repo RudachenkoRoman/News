@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rudachenkoroman.astonIntensivFinal.R
 import com.rudachenkoroman.astonIntensivFinal.adapter.NewsAdapter
+import com.rudachenkoroman.astonIntensivFinal.api.NewsApi
 import com.rudachenkoroman.astonIntensivFinal.api.RetrofitInstance
 import com.rudachenkoroman.astonIntensivFinal.databinding.FragmentGeneralBinding
 import com.rudachenkoroman.astonIntensivFinal.model.news.Article
@@ -78,8 +79,9 @@ class GeneralFragment : Fragment(), ViewHome.View {
         suspend fun requestGeneralNews(): Response<NewsResponse> {
             return RetrofitInstance.api.getNews(COUNTY_CODE_US, GENERAL)
         }
+
         private const val COUNTY_CODE_US = "us"
-        private const val GENERAL = "general"
+        const val GENERAL = "general"
     }
 }
 
