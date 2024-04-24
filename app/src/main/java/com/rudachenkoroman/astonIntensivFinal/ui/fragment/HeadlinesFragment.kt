@@ -51,9 +51,9 @@ class HeadlinesFragment : Fragment() {
                         viewPager2.currentItem = tab.position
                     }
                     when(viewPager2.currentItem){
-                        0-> NewsApi.requestCategorySearch(GeneralFragment.GENERAL)
-                        1-> NewsApi.requestCategorySearch(BusinessFragment.BUSINESS)
-                        2-> NewsApi.requestCategorySearch(ScienceFragment.SCIENCE)
+                        0-> NewsApi.result = GeneralFragment.GENERAL
+                        1-> NewsApi.result = BusinessFragment.BUSINESS
+                        2-> NewsApi.result = ScienceFragment.SCIENCE
                     }
                 }
 

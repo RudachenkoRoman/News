@@ -12,17 +12,18 @@
         android:layout_width="114dp"
         android:layout_height="65dp"
         android:scaleType="centerCrop"
+        android:src="@drawable/placeholder_news_item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/articleChannel"
+        android:id="@+id/articleImageSource"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginStart="8dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/item_news_icon"
+        android:src="@drawable/placeholder_source_item"
         app:layout_constraintStart_toEndOf="@+id/articleImage"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,7 +38,7 @@
         android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/articleChannel"
+        app:layout_constraintStart_toEndOf="@+id/articleImageSource"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/title" />
 
@@ -53,7 +54,7 @@
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/articleImage"
-        app:layout_constraintTop_toBottomOf="@+id/articleChannel"
+        app:layout_constraintTop_toBottomOf="@+id/articleImageSource"
         tools:text="@string/description" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

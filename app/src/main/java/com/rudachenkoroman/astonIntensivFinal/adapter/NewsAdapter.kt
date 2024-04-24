@@ -9,20 +9,24 @@ import com.bumptech.glide.Glide
 import com.rudachenkoroman.astonIntensivFinal.R
 import com.rudachenkoroman.astonIntensivFinal.databinding.ItemNewsBinding
 import com.rudachenkoroman.astonIntensivFinal.model.news.Article
-import com.rudachenkoroman.astonIntensivFinal.model.source.Source
+import com.rudachenkoroman.astonIntensivFinal.util.getImageSourceNews
 
 class NewsAdapter(private val onClickNews: (item: Article) -> Unit) : ListAdapter <Article, NewsAdapter.ArticleViewHolder>(UserDiffUtil) {
 
     inner class ArticleViewHolder(private val binding: ItemNewsBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(article: Article) {
-            Glide.with(itemView.context)
-                .load(article.urlToImage)
-                .placeholder(R.drawable.placeholder_news_item)
-                .into(binding.articleImage)
-            binding.articleTitle.text = article.source.name
-            binding.articleDescription.text = article.title
+            binding.apply {
+                Glide.with(itemView.context)
+                    .load(article.urlToImage)
+                    .placeholder(R.drawable.placeholder_news_item)
+                    .into(articleImage)
+                articleImageSource.setImageResource(getImageSourceNews(article))
+                articleTitle.text = article.source.name
+                articleDescription.text = article.title
+            }
         }
     }
+
 
     object UserDiffUtil : DiffUtil.ItemCallback<Article>() {
         override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {

@@ -11,16 +11,13 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rudachenkoroman.astonIntensivFinal.R
 import com.rudachenkoroman.astonIntensivFinal.adapter.NewsAdapterSearch
-import com.rudachenkoroman.astonIntensivFinal.api.RetrofitInstance
 import com.rudachenkoroman.astonIntensivFinal.databinding.FragmentSearchNewsBinding
 import com.rudachenkoroman.astonIntensivFinal.model.data.NewsDataSource
 import com.rudachenkoroman.astonIntensivFinal.model.news.Article
-import com.rudachenkoroman.astonIntensivFinal.model.news.NewsResponse
 import com.rudachenkoroman.astonIntensivFinal.presenter.search.SearchPresenter
 import com.rudachenkoroman.astonIntensivFinal.util.UtilQueryTextListener
 import com.rudachenkoroman.astonIntensivFinal.presenter.ViewHome
 import com.rudachenkoroman.astonIntensivFinal.util.setFragment
-import retrofit2.Response
 
 const val SEARCH_FRAGMENT_TAG = "SEARCH_FRAGMENT_TAG"
 class SearchFragment : Fragment() , ViewHome.View {
@@ -34,10 +31,8 @@ class SearchFragment : Fragment() , ViewHome.View {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSearchNewsBinding.inflate(layoutInflater)
-
         val datasource = NewsDataSource(requireContext())
         presenter = SearchPresenter(this, datasource)
-
         toolbarInit()
         backClicked()
         createRecycle()
@@ -112,12 +107,6 @@ class SearchFragment : Fragment() , ViewHome.View {
 
     override fun showArticles(articles: List<Article>) {
         newsAdapterSearch.submitList(articles.toList())
-    }
-
-    companion object {
-        suspend fun requestSearchNews(): Response<NewsResponse> {
-            return RetrofitInstance.api.getSearchNews("q","us","general")
-        }
     }
 
 }

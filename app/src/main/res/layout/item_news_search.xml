@@ -23,7 +23,7 @@
         android:layout_height="20dp"
         android:layout_marginStart="8dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/item_news_icon"
+        android:src="@drawable/placeholder_source_item"
         app:layout_constraintStart_toEndOf="@+id/articleImageSearch"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -13,7 +13,6 @@ import com.rudachenkoroman.astonIntensivFinal.adapter.SourceAdapter
 import com.rudachenkoroman.astonIntensivFinal.api.RetrofitInstance
 import com.rudachenkoroman.astonIntensivFinal.databinding.FragmentSourcesBinding
 import com.rudachenkoroman.astonIntensivFinal.model.data.NewsDataSource
-import com.rudachenkoroman.astonIntensivFinal.model.news.NewsResponse
 import com.rudachenkoroman.astonIntensivFinal.model.source.Source
 import com.rudachenkoroman.astonIntensivFinal.model.source.SourceResponse
 import com.rudachenkoroman.astonIntensivFinal.presenter.source.SourcePresenter
@@ -38,7 +37,6 @@ class SourcesFragment : Fragment() , ViewHome.SourceView {
         val datasource = NewsDataSource(requireContext())
         presenter = SourcePresenter(this,datasource)
         presenter.requestAll()
-
         toolbarInit()
         toolbarMenuItemClick()
         createRecycle()
@@ -119,6 +117,4 @@ class SourcesFragment : Fragment() , ViewHome.SourceView {
         }
         private const val COUNTY_CODE_US = "us"
     }
-
-
 }

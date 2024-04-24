@@ -33,9 +33,8 @@ class DetailSourceFragment : Fragment(), ViewHome.View {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentDetailSourceBinding.inflate(layoutInflater)
-
         val datasource = NewsDataSource(requireContext())
-        presenter = SourceNewsPresenter(this,datasource)
+        presenter = SourceNewsPresenter(this, datasource)
         presenter.requestAll()
         backClicked()
         createRecycle()
@@ -44,7 +43,8 @@ class DetailSourceFragment : Fragment(), ViewHome.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val sources = requireArguments().getSerializableCompat(BUNDLE_KEY_SOURCE, Source::class.java)
+        val sources =
+            requireArguments().getSerializableCompat(BUNDLE_KEY_SOURCE, Source::class.java)
         if (sources != null) {
             requestSourceId = sources.id
             toolbarInit(sources)
@@ -74,7 +74,7 @@ class DetailSourceFragment : Fragment(), ViewHome.View {
             layoutManager = LinearLayoutManager(requireContext())
             addItemDecoration(
                 DividerItemDecoration(
-                    requireContext(),DividerItemDecoration.VERTICAL
+                    requireContext(), DividerItemDecoration.VERTICAL
                 )
             )
         }
@@ -112,9 +112,12 @@ class DetailSourceFragment : Fragment(), ViewHome.View {
                 }
             }
         }
+
         suspend fun requestDetailSourceNews(): Response<NewsResponse> {
-            return RetrofitInstance.api.getDetailSourceNews(SEARCH_QUERY,
-                TITLE, requestSourceId)
+            return RetrofitInstance.api.getDetailSourceNews(
+                SEARCH_QUERY,
+                TITLE, requestSourceId
+            )
         }
 
         const val DETAIL_SOURCE_FRAGMENT_TAG = "DETAIL_SOURCE_FRAGMENT_TAG"

@@ -14,7 +14,7 @@ interface NewsApi {
         @Query("category")
         category: String,
         @Query("apiKey")
-        api: String = API_KEY_ONE,
+        api: String = API_KEY_THREE,
     ): Response<NewsResponse>
 
     @GET("/v2/top-headlines/sources")
@@ -22,7 +22,7 @@ interface NewsApi {
         @Query("country")
         countryCode: String,
         @Query("apiKey")
-        api: String = API_KEY_ONE,
+        api: String = API_KEY_THREE,
     ): Response<SourceResponse>
 
     @GET("/v2/everything")
@@ -34,7 +34,7 @@ interface NewsApi {
         @Query("sources")
         sources: String,
         @Query("apiKey")
-        apiKey: String = API_KEY_ONE,
+        apiKey: String = API_KEY_THREE,
     ): Response<NewsResponse>
 
     @GET("/v2/top-headlines/")
@@ -46,7 +46,7 @@ interface NewsApi {
         @Query("category")
         category: String = result,
         @Query("apiKey")
-        apiKey: String = API_KEY_ONE
+        apiKey: String = API_KEY_THREE
     ): Response<NewsResponse>
 
     companion object{
@@ -54,11 +54,7 @@ interface NewsApi {
         private const val API_KEY_TWO = "0d33c096900c4c4097ce0ba7700cb02e"
         private const val API_KEY_THREE ="0300182d74954aafb0a63224ff3f5723"
         private const val QUERY_PAGE_SIZE = "20"
-        private var result = " "
-
-        fun requestCategorySearch(input: String){
-            result = input
-        }
+        var result = " "
     }
 }
 
