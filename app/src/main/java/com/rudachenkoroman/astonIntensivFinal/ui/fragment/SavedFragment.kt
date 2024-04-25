@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isEmpty
+import androidx.core.view.isNotEmpty
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,9 +14,12 @@ import com.rudachenkoroman.astonIntensivFinal.R
 import com.rudachenkoroman.astonIntensivFinal.adapter.NewsAdapter
 import com.rudachenkoroman.astonIntensivFinal.databinding.FragmentSavedBinding
 import com.rudachenkoroman.astonIntensivFinal.model.data.NewsDataSource
+import com.rudachenkoroman.astonIntensivFinal.model.data.NewsRepository
+import com.rudachenkoroman.astonIntensivFinal.model.db.ArticleDatabase
 import com.rudachenkoroman.astonIntensivFinal.model.news.Article
 import com.rudachenkoroman.astonIntensivFinal.presenter.ViewHome
 import com.rudachenkoroman.astonIntensivFinal.presenter.favorite.FavoritePresenter
+import com.rudachenkoroman.astonIntensivFinal.util.getSerializableCompat
 import com.rudachenkoroman.astonIntensivFinal.util.setFragment
 
 const val SAVED_FRAGMENT_TAG = "SAVED_FRAGMENT_TAG"
@@ -28,14 +34,30 @@ class SavedFragment : Fragment(), ViewHome.Favorite{
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSavedBinding.inflate(layoutInflater)
-
-        val datasource = NewsDataSource(requireContext())
-        presenter = FavoritePresenter(this, datasource)
-        presenter.getAll()
+        setupPresenter()
         toolbarInit()
         toolbarMenuItemClick()
         createRecycle()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        showNotSavedImage()
+    }
+
+    private fun showNotSavedImage(){
+        if (NewsDataSource.allArticlesSize == 0){
+            binding.emptySaved.isVisible = true
+        } else {
+            binding.emptySaved.isVisible = false
+        }
+    }
+
+    private fun setupPresenter(){
+        val datasource = NewsDataSource(requireContext())
+        presenter = FavoritePresenter(this, datasource)
+        presenter.getAll()
     }
 
     private fun onNewsClick(item: Article) {
@@ -72,8 +94,8 @@ class SavedFragment : Fragment(), ViewHome.Favorite{
                     R.id.search -> {
                         parentFragmentManager.setFragment(
                             R.id.fragmentContainerView,
-                            SearchFragment(),
-                            SEARCH_FRAGMENT_TAG
+                            SearchNewsFragment(),
+                            SEARCH_NEWS_FRAGMENT_TAG
                         )
                     }
                 }

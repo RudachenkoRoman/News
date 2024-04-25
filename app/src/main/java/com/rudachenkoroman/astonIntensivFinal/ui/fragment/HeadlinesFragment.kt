@@ -91,8 +91,8 @@ class HeadlinesFragment : Fragment() {
                     R.id.search -> {
                         parentFragmentManager.setFragment(
                             R.id.fragmentContainerView,
-                            SearchFragment(),
-                            SEARCH_FRAGMENT_TAG
+                            SearchNewsFragment(),
+                            SEARCH_NEWS_FRAGMENT_TAG
                         )
                     }
                 }

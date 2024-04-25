@@ -1,12 +1,10 @@
-package com.rudachenkoroman.astonIntensivFinal.presenter.search
+package com.rudachenkoroman.astonIntensivFinal.presenter.search.newsSearch
 
 import com.rudachenkoroman.astonIntensivFinal.model.data.NewsDataSource
 import com.rudachenkoroman.astonIntensivFinal.model.news.NewsResponse
-import com.rudachenkoroman.astonIntensivFinal.presenter.search.SearchHome
 import com.rudachenkoroman.astonIntensivFinal.presenter.ViewHome
 
-class SearchPresenter(val view: ViewHome.View, private val dataSource: NewsDataSource) :
-    SearchHome.Presenter {
+class SearchPresenter(val view: ViewHome.View, private val dataSource: NewsDataSource) : SearchHome.Presenter {
     override fun search(term: String) {
         this.view.showProgressBar()
         this.dataSource.searchNews(term, this)

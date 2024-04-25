@@ -4,29 +4,25 @@ import android.content.Context
 import com.rudachenkoroman.astonIntensivFinal.api.RetrofitInstance
 import com.rudachenkoroman.astonIntensivFinal.model.db.ArticleDatabase
 import com.rudachenkoroman.astonIntensivFinal.model.news.Article
-import com.rudachenkoroman.astonIntensivFinal.model.news.NewsResponse
 import com.rudachenkoroman.astonIntensivFinal.presenter.favorite.FavoriteHome
 import com.rudachenkoroman.astonIntensivFinal.presenter.news.NewsHome
-import com.rudachenkoroman.astonIntensivFinal.presenter.search.SearchHome
+import com.rudachenkoroman.astonIntensivFinal.presenter.search.newsSearch.SearchHome
 import com.rudachenkoroman.astonIntensivFinal.presenter.source.SourceHome
 import com.rudachenkoroman.astonIntensivFinal.ui.fragment.BusinessFragment
 import com.rudachenkoroman.astonIntensivFinal.ui.fragment.DetailSourceFragment
 import com.rudachenkoroman.astonIntensivFinal.ui.fragment.GeneralFragment
 import com.rudachenkoroman.astonIntensivFinal.ui.fragment.ScienceFragment
-import com.rudachenkoroman.astonIntensivFinal.ui.fragment.SearchFragment
 import com.rudachenkoroman.astonIntensivFinal.ui.fragment.SourcesFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.Response
 
 class NewsDataSource(context: Context) {
 
     private var db: ArticleDatabase = ArticleDatabase(context)
     private var newsRepository: NewsRepository = NewsRepository(db)
-
     fun getGeneralNews(callback: NewsHome.Presenter) {
         GlobalScope.launch(Dispatchers.Main) {
             val response = GeneralFragment.requestGeneralNews()
@@ -127,6 +123,7 @@ class NewsDataSource(context: Context) {
         var allArticles: List<Article>
         CoroutineScope(Dispatchers.IO).launch {
             allArticles = newsRepository.getAll()
+            allArticlesSize = allArticles.size
             withContext(Dispatchers.Main) {
                 callback.onSuccess(allArticles)
             }
@@ -139,5 +136,9 @@ class NewsDataSource(context: Context) {
                 newsRepository.delete(articleSafe)
             }
         }
+    }
+
+    companion object{
+        var allArticlesSize = 0
     }
 }

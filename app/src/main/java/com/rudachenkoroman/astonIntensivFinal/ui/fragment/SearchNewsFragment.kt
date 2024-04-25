@@ -14,13 +14,13 @@ import com.rudachenkoroman.astonIntensivFinal.adapter.NewsAdapterSearch
 import com.rudachenkoroman.astonIntensivFinal.databinding.FragmentSearchNewsBinding
 import com.rudachenkoroman.astonIntensivFinal.model.data.NewsDataSource
 import com.rudachenkoroman.astonIntensivFinal.model.news.Article
-import com.rudachenkoroman.astonIntensivFinal.presenter.search.SearchPresenter
+import com.rudachenkoroman.astonIntensivFinal.presenter.search.newsSearch.SearchPresenter
 import com.rudachenkoroman.astonIntensivFinal.util.UtilQueryTextListener
 import com.rudachenkoroman.astonIntensivFinal.presenter.ViewHome
 import com.rudachenkoroman.astonIntensivFinal.util.setFragment
 
-const val SEARCH_FRAGMENT_TAG = "SEARCH_FRAGMENT_TAG"
-class SearchFragment : Fragment() , ViewHome.View {
+const val SEARCH_NEWS_FRAGMENT_TAG = "SEARCH_NEWS_FRAGMENT_TAG"
+class SearchNewsFragment : Fragment() , ViewHome.View {
 
     private val newsAdapterSearch by lazy { NewsAdapterSearch(onClickSearch = { item -> onClickSearch(item) }) }
     private lateinit var binding: FragmentSearchNewsBinding
@@ -108,5 +108,4 @@ class SearchFragment : Fragment() , ViewHome.View {
     override fun showArticles(articles: List<Article>) {
         newsAdapterSearch.submitList(articles.toList())
     }
-
 }

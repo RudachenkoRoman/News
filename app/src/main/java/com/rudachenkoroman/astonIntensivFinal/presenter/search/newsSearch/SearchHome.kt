@@ -1,4 +1,4 @@
-package com.rudachenkoroman.astonIntensivFinal.presenter.search
+package com.rudachenkoroman.astonIntensivFinal.presenter.search.newsSearch
 
 import com.rudachenkoroman.astonIntensivFinal.model.news.NewsResponse
 
