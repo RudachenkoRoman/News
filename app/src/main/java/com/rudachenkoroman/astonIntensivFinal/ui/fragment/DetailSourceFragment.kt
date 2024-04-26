@@ -18,6 +18,7 @@ import com.rudachenkoroman.astonIntensivFinal.model.news.NewsResponse
 import com.rudachenkoroman.astonIntensivFinal.model.source.Source
 import com.rudachenkoroman.astonIntensivFinal.presenter.ViewHome
 import com.rudachenkoroman.astonIntensivFinal.presenter.news.sourceNews.SourceNewsPresenter
+import com.rudachenkoroman.astonIntensivFinal.ui.fragment.DetailNewsFragment.Companion.DETAIL_NEWS_FRAGMENT_TAG
 import com.rudachenkoroman.astonIntensivFinal.util.getSerializableCompat
 import com.rudachenkoroman.astonIntensivFinal.util.setFragment
 import retrofit2.Response

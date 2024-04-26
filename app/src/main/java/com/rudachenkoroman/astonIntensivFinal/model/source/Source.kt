@@ -4,7 +4,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.io.Serializable
 
-
 @Entity(
     tableName = "source"
 )
@@ -18,4 +17,4 @@ data class Source(
     val language: String,
     val name: String,
     val url: String
-): Serializable
+) : Serializable

@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isEmpty
-import androidx.core.view.isNotEmpty
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -14,15 +12,14 @@ import com.rudachenkoroman.astonIntensivFinal.R
 import com.rudachenkoroman.astonIntensivFinal.adapter.NewsAdapter
 import com.rudachenkoroman.astonIntensivFinal.databinding.FragmentSavedBinding
 import com.rudachenkoroman.astonIntensivFinal.model.data.NewsDataSource
-import com.rudachenkoroman.astonIntensivFinal.model.data.NewsRepository
-import com.rudachenkoroman.astonIntensivFinal.model.db.ArticleDatabase
 import com.rudachenkoroman.astonIntensivFinal.model.news.Article
 import com.rudachenkoroman.astonIntensivFinal.presenter.ViewHome
 import com.rudachenkoroman.astonIntensivFinal.presenter.favorite.FavoritePresenter
-import com.rudachenkoroman.astonIntensivFinal.util.getSerializableCompat
+import com.rudachenkoroman.astonIntensivFinal.ui.fragment.DetailNewsFragment.Companion.DETAIL_NEWS_FRAGMENT_TAG
+import com.rudachenkoroman.astonIntensivFinal.ui.fragment.FiltersFragment.Companion.FILTERS_FRAGMENT_TAG
+import com.rudachenkoroman.astonIntensivFinal.ui.fragment.SearchNewsFragment.Companion.SEARCH_NEWS_FRAGMENT_TAG
 import com.rudachenkoroman.astonIntensivFinal.util.setFragment
 
-const val SAVED_FRAGMENT_TAG = "SAVED_FRAGMENT_TAG"
 class SavedFragment : Fragment(), ViewHome.Favorite{
 
     private val newsAdapter by lazy { NewsAdapter(onClickNews = { item -> onNewsClick(item) }) }
@@ -114,5 +111,9 @@ class SavedFragment : Fragment(), ViewHome.Favorite{
 
     override fun showArticles(articles: List<Article>) {
         newsAdapter.submitList(articles.toList())
+    }
+
+    companion object{
+        const val SAVED_FRAGMENT_TAG = "SAVED_FRAGMENT_TAG"
     }
 }

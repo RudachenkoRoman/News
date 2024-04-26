@@ -13,17 +13,13 @@ class BusinessPresenter (
         this.view.showProgressBar()
         this.dataSource.getBusinessNews(this)
     }
-
     override fun onSuccess(newsResponse: NewsResponse) {
         this.view.showArticles(newsResponse.articles)
     }
-
     override fun onError(message: String) {
         this.view.showFailure(message)
     }
-
     override fun onComplete() {
         this.view.hideProgressBar()
     }
-
 }

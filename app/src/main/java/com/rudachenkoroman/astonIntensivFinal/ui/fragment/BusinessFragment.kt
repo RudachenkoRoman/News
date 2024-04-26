@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rudachenkoroman.astonIntensivFinal.R
 import com.rudachenkoroman.astonIntensivFinal.adapter.NewsAdapter
-import com.rudachenkoroman.astonIntensivFinal.api.NewsApi
 import com.rudachenkoroman.astonIntensivFinal.api.RetrofitInstance
 import com.rudachenkoroman.astonIntensivFinal.databinding.FragmentBusinessBinding
 import com.rudachenkoroman.astonIntensivFinal.model.news.Article
@@ -18,6 +17,7 @@ import com.rudachenkoroman.astonIntensivFinal.model.data.NewsDataSource
 import com.rudachenkoroman.astonIntensivFinal.model.news.NewsResponse
 import com.rudachenkoroman.astonIntensivFinal.presenter.news.business.BusinessPresenter
 import com.rudachenkoroman.astonIntensivFinal.presenter.ViewHome
+import com.rudachenkoroman.astonIntensivFinal.ui.fragment.DetailNewsFragment.Companion.DETAIL_NEWS_FRAGMENT_TAG
 import com.rudachenkoroman.astonIntensivFinal.util.setFragment
 import retrofit2.Response
 

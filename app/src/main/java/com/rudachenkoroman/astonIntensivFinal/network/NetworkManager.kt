@@ -7,8 +7,9 @@ import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import androidx.lifecycle.LiveData
 
-class NetworkManager(context: Context) : LiveData<Boolean>(){
-    private var connectivityManager = context.applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+class NetworkManager(context: Context) : LiveData<Boolean>() {
+    private var connectivityManager =
+        context.applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
     override fun onActive() {
         super.onActive()
@@ -20,7 +21,7 @@ class NetworkManager(context: Context) : LiveData<Boolean>(){
         connectivityManager.unregisterNetworkCallback(networkCallback)
     }
 
-    private val networkCallback = object : ConnectivityManager.NetworkCallback(){
+    private val networkCallback = object : ConnectivityManager.NetworkCallback() {
 
         override fun onAvailable(network: Network) {
             super.onAvailable(network)
@@ -38,7 +39,7 @@ class NetworkManager(context: Context) : LiveData<Boolean>(){
         }
     }
 
-    private fun checkNetworkConnectivity(){
+    private fun checkNetworkConnectivity() {
         val network = connectivityManager.activeNetwork
         if (network == null) {
             postValue(false)
@@ -52,7 +53,7 @@ class NetworkManager(context: Context) : LiveData<Boolean>(){
             addTransportType(NetworkCapabilities.TRANSPORT_ETHERNET)
         }.build()
 
-        connectivityManager.registerNetworkCallback(requestBuilder,networkCallback)
+        connectivityManager.registerNetworkCallback(requestBuilder, networkCallback)
     }
 
 }

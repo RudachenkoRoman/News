@@ -13,17 +13,13 @@ class SciencePresenter (
         this.view.showProgressBar()
         this.dataSource.getScienceNews(this)
     }
-
     override fun onSuccess(newsResponse: NewsResponse) {
         this.view.showArticles(newsResponse.articles)
     }
-
     override fun onError(message: String) {
         this.view.showFailure(message)
     }
-
     override fun onComplete() {
         this.view.hideProgressBar()
     }
-
 }

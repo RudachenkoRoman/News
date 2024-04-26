@@ -13,8 +13,6 @@ import com.rudachenkoroman.astonIntensivFinal.databinding.FragmentFiltersBinding
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-const val FILTERS_FRAGMENT_TAG = "FILTERS_FRAGMENT_TAG"
-
 class FiltersFragment : Fragment() {
 
     private lateinit var binding: FragmentFiltersBinding
@@ -53,8 +51,8 @@ class FiltersFragment : Fragment() {
         }
     }
 
-    private fun showText(){
-        if (data !== "null date"){
+    private fun showText() {
+        if (data !== "null date") {
             binding.chooseDate.text = data
         }
     }
@@ -114,15 +112,21 @@ class FiltersFragment : Fragment() {
             val startDay = simpleFormatDateAndMonth.format(it.first)
             val endDay = simpleFormatDateAndMonth.format(it.second)
             val year = simpleFormatYear.format(it.second)
-             binding.apply {
+            binding.apply {
                 calendar.setImageResource(R.drawable.calendar_choice)
-                chooseDate.setTextColor(ResourcesCompat.getColor(resources, R.color.primary60, null))
+                chooseDate.setTextColor(
+                    ResourcesCompat.getColor(
+                        resources,
+                        R.color.primary60,
+                        null
+                    )
+                )
                 if (it.first != it.second) {
-                    chooseDate.text = getString(R.string.two_date,startDay,endDay,year)
+                    chooseDate.text = getString(R.string.two_date, startDay, endDay, year)
                 } else {
-                    chooseDate.text = getString(R.string.one_date,startDay,year)
+                    chooseDate.text = getString(R.string.one_date, startDay, year)
                 }
-                 isColorTextAndCalendarIcon = false
+                isColorTextAndCalendarIcon = false
             }
         }
         datePicker.addOnNegativeButtonClickListener {
@@ -135,13 +139,19 @@ class FiltersFragment : Fragment() {
         }
     }
 
-    private fun choiceDate(){
+    private fun choiceDate() {
         binding.apply {
-            if (isColorTextAndCalendarIcon){
+            if (isColorTextAndCalendarIcon) {
                 chooseDate.setTextColor(ResourcesCompat.getColor(resources, R.color.black, null))
                 calendar.setImageResource(R.drawable.calendar)
             } else {
-                chooseDate.setTextColor(ResourcesCompat.getColor(resources, R.color.primary60, null))
+                chooseDate.setTextColor(
+                    ResourcesCompat.getColor(
+                        resources,
+                        R.color.primary60,
+                        null
+                    )
+                )
                 calendar.setImageResource(R.drawable.calendar_choice)
             }
         }
@@ -172,15 +182,17 @@ class FiltersFragment : Fragment() {
         }
     }
 
-    private fun choiceNewsCategory(){
+    private fun choiceNewsCategory() {
         binding.apply {
             when (newsCategory) {
                 1 -> {
                     buttonPopular.setImageResource(R.drawable.button_popular_checked)
                 }
+
                 2 -> {
                     buttonNew.setImageResource(R.drawable.button_new_checked)
                 }
+
                 3 -> {
                     buttonRelevant.setImageResource(R.drawable.button_relevant_checked)
                 }
@@ -213,15 +225,17 @@ class FiltersFragment : Fragment() {
     }
 
 
-    private fun choiceLanguageCategory(){
+    private fun choiceLanguageCategory() {
         binding.apply {
             when (languageCategory) {
                 1 -> {
                     buttonRussian.setImageResource(R.drawable.button_russian_checked)
                 }
+
                 2 -> {
                     buttonEnglish.setImageResource(R.drawable.button_english_checked)
                 }
+
                 3 -> {
                     buttonDeutsch.setImageResource(R.drawable.button_deutsch_checked)
                 }
@@ -235,5 +249,9 @@ class FiltersFragment : Fragment() {
         outState.putBoolean("color", isColorTextAndCalendarIcon)
         outState.putInt("newsCategory", newsCategory)
         outState.putInt("languageCategory", languageCategory)
+    }
+
+    companion object {
+        const val FILTERS_FRAGMENT_TAG = "FILTERS_FRAGMENT_TAG"
     }
 }

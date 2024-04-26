@@ -11,10 +11,9 @@ import com.rudachenkoroman.astonIntensivFinal.R
 import com.rudachenkoroman.astonIntensivFinal.adapter.FragmentPageAdapter
 import com.rudachenkoroman.astonIntensivFinal.api.NewsApi
 import com.rudachenkoroman.astonIntensivFinal.databinding.FragmentHeadlinesBinding
-import com.rudachenkoroman.astonIntensivFinal.network.NetworkManager
+import com.rudachenkoroman.astonIntensivFinal.ui.fragment.FiltersFragment.Companion.FILTERS_FRAGMENT_TAG
+import com.rudachenkoroman.astonIntensivFinal.ui.fragment.SearchNewsFragment.Companion.SEARCH_NEWS_FRAGMENT_TAG
 import com.rudachenkoroman.astonIntensivFinal.util.setFragment
-
-const val HEADLINES_FRAGMENT_TAG = "HEADLINES_FRAGMENT_TAG"
 
 class HeadlinesFragment : Fragment() {
     private lateinit var binding: FragmentHeadlinesBinding
@@ -110,4 +109,7 @@ class HeadlinesFragment : Fragment() {
         }
     }
 
+    companion object{
+        const val HEADLINES_FRAGMENT_TAG = "HEADLINES_FRAGMENT_TAG"
+    }
 }

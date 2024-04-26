@@ -23,9 +23,6 @@ import com.rudachenkoroman.astonIntensivFinal.presenter.ViewHome
 import com.rudachenkoroman.astonIntensivFinal.presenter.favorite.FavoritePresenter
 import com.rudachenkoroman.astonIntensivFinal.util.getSerializableCompat
 
-const val BUNDLE_KEY = "BUNDLE_KEY"
-const val DETAIL_NEWS_FRAGMENT_TAG = "USER_DETAILS_FRAGMENT_TAG"
-
 class DetailNewsFragment : Fragment(), ViewHome.Favorite {
 
     private lateinit var binding: FragmentDetailNewsBinding
@@ -209,9 +206,13 @@ class DetailNewsFragment : Fragment(), ViewHome.Favorite {
                 }
             }
         }
+
+        const val BUNDLE_KEY = "BUNDLE_KEY"
+        const val DETAIL_NEWS_FRAGMENT_TAG = "DETAIL_NEWS_FRAGMENT_TAG"
     }
 
     override fun showArticles(articles: List<Article>) {
-
     }
+
+
 }

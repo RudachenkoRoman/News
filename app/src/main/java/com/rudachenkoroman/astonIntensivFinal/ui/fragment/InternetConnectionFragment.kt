@@ -6,16 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.rudachenkoroman.astonIntensivFinal.R
 import com.rudachenkoroman.astonIntensivFinal.databinding.FragmentInternetConnectionBinding
 import com.rudachenkoroman.astonIntensivFinal.network.NetworkManager
-import com.rudachenkoroman.astonIntensivFinal.util.setFragment
 
 class InternetConnectionFragment : Fragment() {
     private lateinit var binding: FragmentInternetConnectionBinding
-    private  lateinit var bottomNavigation : BottomNavigationView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,7 +56,6 @@ class InternetConnectionFragment : Fragment() {
             refreshConnection.startAnimation(rotate)
         }
     }
-
 
     companion object {
         const val INTERNET_CONNECTION_FRAGMENT_TAG = "INTERNET_CONNECTION_FRAGMENT_TAG"

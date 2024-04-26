@@ -20,14 +20,13 @@ import com.rudachenkoroman.astonIntensivFinal.model.source.SourceResponse
 import com.rudachenkoroman.astonIntensivFinal.presenter.source.SourcePresenter
 import com.rudachenkoroman.astonIntensivFinal.presenter.ViewHome
 import com.rudachenkoroman.astonIntensivFinal.ui.fragment.DetailSourceFragment.Companion.DETAIL_SOURCE_FRAGMENT_TAG
+import com.rudachenkoroman.astonIntensivFinal.ui.fragment.FiltersFragment.Companion.FILTERS_FRAGMENT_TAG
 import com.rudachenkoroman.astonIntensivFinal.util.UtilQueryTextListener
 import com.rudachenkoroman.astonIntensivFinal.util.setFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
-
-const val SOURCE_FRAGMENT_TAG = "SOURCE_FRAGMENT_TAG"
 
 class SourcesFragment : Fragment() , ViewHome.SourceView {
 
@@ -132,5 +131,6 @@ class SourcesFragment : Fragment() , ViewHome.SourceView {
             return RetrofitInstance.api.getSource(COUNTY_CODE_US)
         }
         private const val COUNTY_CODE_US = "us"
+        const val SOURCE_FRAGMENT_TAG = "SOURCE_FRAGMENT_TAG"
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context
 import com.rudachenkoroman.astonIntensivFinal.api.RetrofitInstance
 import com.rudachenkoroman.astonIntensivFinal.model.db.ArticleDatabase
 import com.rudachenkoroman.astonIntensivFinal.model.news.Article
+import com.rudachenkoroman.astonIntensivFinal.model.news.NewsResponse
 import com.rudachenkoroman.astonIntensivFinal.presenter.favorite.FavoriteHome
 import com.rudachenkoroman.astonIntensivFinal.presenter.news.NewsHome
 import com.rudachenkoroman.astonIntensivFinal.presenter.search.newsSearch.SearchHome
@@ -14,11 +15,14 @@ import com.rudachenkoroman.astonIntensivFinal.ui.fragment.GeneralFragment
 import com.rudachenkoroman.astonIntensivFinal.ui.fragment.ScienceFragment
 import com.rudachenkoroman.astonIntensivFinal.ui.fragment.SourcesFragment
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import okhttp3.Response
 
+@OptIn(DelicateCoroutinesApi::class)
 class NewsDataSource(context: Context) {
 
     private var db: ArticleDatabase = ArticleDatabase(context)
@@ -37,7 +41,6 @@ class NewsDataSource(context: Context) {
             }
         }
     }
-
     fun getBusinessNews(callback: NewsHome.Presenter) {
         GlobalScope.launch(Dispatchers.Main) {
             val response = BusinessFragment.requestBusinessNews()
@@ -138,7 +141,7 @@ class NewsDataSource(context: Context) {
         }
     }
 
-    companion object{
+    companion object {
         var allArticlesSize = 0
     }
 }

@@ -9,15 +9,12 @@ class SearchPresenter(val view: ViewHome.View, private val dataSource: NewsDataS
         this.view.showProgressBar()
         this.dataSource.searchNews(term, this)
     }
-
     override fun onSuccess(newsResponse: NewsResponse) {
         this.view.showArticles(newsResponse.articles)
     }
-
     override fun onError(message: String) {
         this.view.showFailure(message)
     }
-
     override fun onComplete() {
         this.view.hideProgressBar()
     }

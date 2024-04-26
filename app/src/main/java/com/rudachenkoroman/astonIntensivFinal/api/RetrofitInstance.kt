@@ -8,10 +8,8 @@ import java.util.concurrent.TimeUnit
 
 class RetrofitInstance {
     companion object{
-
         private const val BASE_URL = "https://newsapi.org/"
         private const val PING_INTERVAL = 3L
-
         private val retrofit by lazy {
             val logging = HttpLoggingInterceptor()
             logging.setLevel(HttpLoggingInterceptor.Level.BODY)

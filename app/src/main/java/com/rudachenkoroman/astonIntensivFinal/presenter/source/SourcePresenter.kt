@@ -12,17 +12,13 @@ class SourcePresenter (
         this.view.showProgressBar()
         this.dataSource.getSourceNews(this)
     }
-
     override fun onSuccess(sourceResponse: SourceResponse) {
         this.view.showSource(sourceResponse.sources)
     }
-
     override fun onError(message: String) {
         this.view.showFailure(message)
     }
-
     override fun onComplete() {
         this.view.hideProgressBar()
     }
-
 }
