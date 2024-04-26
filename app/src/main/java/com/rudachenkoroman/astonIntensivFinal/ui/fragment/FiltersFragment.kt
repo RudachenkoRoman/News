@@ -10,6 +10,7 @@ import androidx.core.util.Pair
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.rudachenkoroman.astonIntensivFinal.R
 import com.rudachenkoroman.astonIntensivFinal.databinding.FragmentFiltersBinding
+import com.rudachenkoroman.astonIntensivFinal.util.setOnBackPressedCallback
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -69,7 +70,7 @@ class FiltersFragment : Fragment() {
         binding.apply {
             toolbar.toolbarMain.setNavigationIcon(R.drawable.back)
             toolbar.toolbarMain.setNavigationOnClickListener {
-                requireActivity().onBackPressedDispatcher.onBackPressed()
+                setOnBackPressedCallback()
             }
         }
     }

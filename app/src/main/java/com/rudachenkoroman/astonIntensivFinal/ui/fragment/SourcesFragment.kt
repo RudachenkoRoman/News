@@ -1,5 +1,6 @@
 package com.rudachenkoroman.astonIntensivFinal.ui.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +23,7 @@ import com.rudachenkoroman.astonIntensivFinal.presenter.ViewHome
 import com.rudachenkoroman.astonIntensivFinal.ui.fragment.DetailSourceFragment.Companion.DETAIL_SOURCE_FRAGMENT_TAG
 import com.rudachenkoroman.astonIntensivFinal.ui.fragment.FiltersFragment.Companion.FILTERS_FRAGMENT_TAG
 import com.rudachenkoroman.astonIntensivFinal.util.UtilQueryTextListener
+import com.rudachenkoroman.astonIntensivFinal.util.finishFragment
 import com.rudachenkoroman.astonIntensivFinal.util.setFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -46,6 +48,11 @@ class SourcesFragment : Fragment() , ViewHome.SourceView {
         toolbarMenuItemClick()
         createRecycle()
         return binding.root
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        finishFragment()
     }
 
     private fun createRecycle() {

@@ -19,6 +19,7 @@ import com.rudachenkoroman.astonIntensivFinal.util.UtilQueryTextListener
 import com.rudachenkoroman.astonIntensivFinal.presenter.ViewHome
 import com.rudachenkoroman.astonIntensivFinal.ui.fragment.DetailNewsFragment.Companion.DETAIL_NEWS_FRAGMENT_TAG
 import com.rudachenkoroman.astonIntensivFinal.util.setFragment
+import com.rudachenkoroman.astonIntensivFinal.util.setOnBackPressedCallback
 
 class SearchNewsFragment : Fragment() , ViewHome.View {
 
@@ -88,7 +89,7 @@ class SearchNewsFragment : Fragment() , ViewHome.View {
         binding.apply {
             toolbar.toolbarMain.setNavigationIcon(R.drawable.back)
             toolbar.toolbarMain.setNavigationOnClickListener {
-                requireActivity().onBackPressedDispatcher.onBackPressed()
+                setOnBackPressedCallback()
             }
         }
     }

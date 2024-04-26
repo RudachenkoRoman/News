@@ -21,6 +21,7 @@ import com.rudachenkoroman.astonIntensivFinal.presenter.news.sourceNews.SourceNe
 import com.rudachenkoroman.astonIntensivFinal.ui.fragment.DetailNewsFragment.Companion.DETAIL_NEWS_FRAGMENT_TAG
 import com.rudachenkoroman.astonIntensivFinal.util.getSerializableCompat
 import com.rudachenkoroman.astonIntensivFinal.util.setFragment
+import com.rudachenkoroman.astonIntensivFinal.util.setOnBackPressedCallback
 import retrofit2.Response
 
 class DetailSourceFragment : Fragment(), ViewHome.View {
@@ -64,7 +65,7 @@ class DetailSourceFragment : Fragment(), ViewHome.View {
         binding.apply {
             toolbar.toolbarMain.setNavigationIcon(R.drawable.back)
             toolbar.toolbarMain.setNavigationOnClickListener {
-                requireActivity().onBackPressedDispatcher.onBackPressed()
+                setOnBackPressedCallback()
             }
         }
     }

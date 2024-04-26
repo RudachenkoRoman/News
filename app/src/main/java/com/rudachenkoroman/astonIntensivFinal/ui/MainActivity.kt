@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity() {
                             HeadlinesFragment(),
                             HEADLINES_FRAGMENT_TAG
                         )
+
                     }
 
                     R.id.saved -> {

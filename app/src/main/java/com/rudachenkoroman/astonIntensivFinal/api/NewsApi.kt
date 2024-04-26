@@ -14,7 +14,7 @@ interface NewsApi {
         @Query("category")
         category: String,
         @Query("apiKey")
-        api: String = API_KEY_ONE,
+        api: String = API_KEY_TWO,
     ): Response<NewsResponse>
 
     @GET("/v2/top-headlines/sources")
@@ -22,7 +22,7 @@ interface NewsApi {
         @Query("country")
         countryCode: String,
         @Query("apiKey")
-        api: String = API_KEY_ONE,
+        api: String = API_KEY_TWO,
     ): Response<SourceResponse>
 
     @GET("/v2/everything")
@@ -34,7 +34,7 @@ interface NewsApi {
         @Query("sources")
         sources: String,
         @Query("apiKey")
-        apiKey: String = API_KEY_ONE,
+        apiKey: String = API_KEY_TWO,
     ): Response<NewsResponse>
 
     @GET("/v2/top-headlines/")
@@ -46,7 +46,7 @@ interface NewsApi {
         @Query("category")
         category: String = result,
         @Query("apiKey")
-        apiKey: String = API_KEY_ONE
+        apiKey: String = API_KEY_TWO
     ): Response<NewsResponse>
 
     companion object{

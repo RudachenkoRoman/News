@@ -1,9 +1,11 @@
 package com.rudachenkoroman.astonIntensivFinal.ui.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
@@ -13,6 +15,7 @@ import com.rudachenkoroman.astonIntensivFinal.api.NewsApi
 import com.rudachenkoroman.astonIntensivFinal.databinding.FragmentHeadlinesBinding
 import com.rudachenkoroman.astonIntensivFinal.ui.fragment.FiltersFragment.Companion.FILTERS_FRAGMENT_TAG
 import com.rudachenkoroman.astonIntensivFinal.ui.fragment.SearchNewsFragment.Companion.SEARCH_NEWS_FRAGMENT_TAG
+import com.rudachenkoroman.astonIntensivFinal.util.finishFragment
 import com.rudachenkoroman.astonIntensivFinal.util.setFragment
 
 class HeadlinesFragment : Fragment() {
@@ -30,6 +33,11 @@ class HeadlinesFragment : Fragment() {
             viewPagerCallback()
         }
         return binding.root
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        finishFragment()
     }
 
     private fun viewPagerCallback() {

@@ -51,9 +51,18 @@ fun getImageSource(source: Source): Int {
     }
 }
 
-fun Fragment.setOnBackPressedCallback(
-    owner: LifecycleOwner? = null,
-    onBackPressed: OnBackPressedCallback.() -> Unit
-) {
-    requireActivity().onBackPressedDispatcher.addCallback(owner) { onBackPressed() }
+fun Fragment.finishFragment(){
+    val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            requireActivity().finish()
+        }
+    }
+    requireActivity().onBackPressedDispatcher.addCallback(
+        this,
+        callback
+    )
+}
+
+fun Fragment.setOnBackPressedCallback(){
+    requireActivity().onBackPressedDispatcher.onBackPressed()
 }

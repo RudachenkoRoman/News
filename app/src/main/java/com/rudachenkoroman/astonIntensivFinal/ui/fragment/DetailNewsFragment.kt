@@ -22,6 +22,7 @@ import com.rudachenkoroman.astonIntensivFinal.model.data.NewsDataSource
 import com.rudachenkoroman.astonIntensivFinal.presenter.ViewHome
 import com.rudachenkoroman.astonIntensivFinal.presenter.favorite.FavoritePresenter
 import com.rudachenkoroman.astonIntensivFinal.util.getSerializableCompat
+import com.rudachenkoroman.astonIntensivFinal.util.setOnBackPressedCallback
 
 class DetailNewsFragment : Fragment(), ViewHome.Favorite {
 
@@ -193,7 +194,7 @@ class DetailNewsFragment : Fragment(), ViewHome.Favorite {
         binding.apply {
             toolbar.toolbarMain.setNavigationIcon(R.drawable.back)
             toolbar.toolbarMain.setNavigationOnClickListener {
-                requireActivity().onBackPressedDispatcher.onBackPressed()
+                setOnBackPressedCallback()
             }
         }
     }
