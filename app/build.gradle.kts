@@ -50,6 +50,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
 
     implementation("androidx.core:core-splashscreen:1.1.0-rc01")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
 
     implementation("androidx.fragment:fragment-ktx:1.6.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")

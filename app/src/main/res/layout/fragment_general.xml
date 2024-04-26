@@ -4,12 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragment.BusinessFragment">
+    tools:context=".presentation.ui.fragment.BusinessFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/generalRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/generalRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     <ProgressBar
         android:id="@+id/progressBar"
