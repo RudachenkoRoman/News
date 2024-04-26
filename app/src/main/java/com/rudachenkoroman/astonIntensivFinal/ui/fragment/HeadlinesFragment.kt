@@ -11,6 +11,7 @@ import com.rudachenkoroman.astonIntensivFinal.R
 import com.rudachenkoroman.astonIntensivFinal.adapter.FragmentPageAdapter
 import com.rudachenkoroman.astonIntensivFinal.api.NewsApi
 import com.rudachenkoroman.astonIntensivFinal.databinding.FragmentHeadlinesBinding
+import com.rudachenkoroman.astonIntensivFinal.network.NetworkManager
 import com.rudachenkoroman.astonIntensivFinal.util.setFragment
 
 const val HEADLINES_FRAGMENT_TAG = "HEADLINES_FRAGMENT_TAG"

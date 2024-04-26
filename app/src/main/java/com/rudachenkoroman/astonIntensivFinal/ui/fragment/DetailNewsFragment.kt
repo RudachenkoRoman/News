@@ -97,7 +97,7 @@ class DetailNewsFragment : Fragment(), ViewHome.Favorite {
         view?.let { it1 ->
             Snackbar.make(
                 it1, R.string.add_to_saved,
-                Snackbar.LENGTH_LONG
+                Snackbar.LENGTH_SHORT
             ).show()
         }
     }
@@ -106,7 +106,7 @@ class DetailNewsFragment : Fragment(), ViewHome.Favorite {
         view?.let { it1 ->
             Snackbar.make(
                 it1, R.string.delete_in_saved,
-                Snackbar.LENGTH_LONG
+                Snackbar.LENGTH_SHORT
             ).show()
         }
     }

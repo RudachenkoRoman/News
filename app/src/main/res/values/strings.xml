@@ -21,6 +21,6 @@
     <string name="delimiter">|</string>
     <string name="add_to_saved">Add to saved</string>
     <string name="delete_in_saved">Delete in saved</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="refresh">Refresh</string>
+    <string name="refreshConnection">No internet connection</string>
 </resources>
