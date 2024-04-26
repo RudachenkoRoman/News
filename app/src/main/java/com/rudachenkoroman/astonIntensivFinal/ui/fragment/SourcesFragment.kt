@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rudachenkoroman.astonIntensivFinal.R
 import com.rudachenkoroman.astonIntensivFinal.adapter.SourceAdapter
-import com.rudachenkoroman.astonIntensivFinal.api.NewsApi
 import com.rudachenkoroman.astonIntensivFinal.api.RetrofitInstance
 import com.rudachenkoroman.astonIntensivFinal.databinding.FragmentSourcesBinding
 import com.rudachenkoroman.astonIntensivFinal.model.data.NewsDataSource
@@ -22,12 +21,8 @@ import com.rudachenkoroman.astonIntensivFinal.presenter.source.SourcePresenter
 import com.rudachenkoroman.astonIntensivFinal.presenter.ViewHome
 import com.rudachenkoroman.astonIntensivFinal.ui.fragment.DetailSourceFragment.Companion.DETAIL_SOURCE_FRAGMENT_TAG
 import com.rudachenkoroman.astonIntensivFinal.ui.fragment.FiltersFragment.Companion.FILTERS_FRAGMENT_TAG
-import com.rudachenkoroman.astonIntensivFinal.util.UtilQueryTextListener
 import com.rudachenkoroman.astonIntensivFinal.util.finishFragment
 import com.rudachenkoroman.astonIntensivFinal.util.setFragment
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class SourcesFragment : Fragment() , ViewHome.SourceView {
@@ -87,7 +82,6 @@ class SourcesFragment : Fragment() , ViewHome.SourceView {
                         )
                     }
                     R.id.search -> {
-                        searchSource()
                     }
                 }
                 true
@@ -95,23 +89,9 @@ class SourcesFragment : Fragment() , ViewHome.SourceView {
         }
     }
 
-    private fun searchSource() {
-        val searchView = binding.toolbar.toolbarMain.menu.findItem(R.id.search).actionView as SearchView
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return true
-            }
-
-        })
-    }
-
     private fun toolbarInit(){
         binding.apply {
-            toolbar.toolbarMain.inflateMenu(R.menu.toolbar_menu_search)
+            toolbar.toolbarMain.inflateMenu(R.menu.toolbar_menu_main)
             toolbar.fragmentName.text = getText(R.string.sources)
             toolbar.toolbarMain.setBackgroundResource(R.color.primary60)
         }

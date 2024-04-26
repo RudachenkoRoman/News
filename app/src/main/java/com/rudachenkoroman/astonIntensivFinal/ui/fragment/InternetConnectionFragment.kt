@@ -20,6 +20,7 @@ class InternetConnectionFragment : Fragment() {
     ): View {
         binding = FragmentInternetConnectionBinding.inflate(layoutInflater)
         onClickRefresh()
+        toolbarInit()
         return binding.root
     }
 
@@ -54,6 +55,12 @@ class InternetConnectionFragment : Fragment() {
         binding.apply {
             val rotate = AnimationUtils.loadAnimation(requireActivity(), R.anim.rotate_animation)
             refreshConnection.startAnimation(rotate)
+        }
+    }
+
+    private fun toolbarInit(){
+        binding.apply {
+            toolbar.toolbarMain.setBackgroundResource(R.color.primary60)
         }
     }
 

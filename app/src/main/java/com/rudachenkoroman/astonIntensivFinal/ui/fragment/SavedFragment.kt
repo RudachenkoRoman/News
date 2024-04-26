@@ -97,11 +97,6 @@ class SavedFragment : Fragment(), ViewHome.Favorite{
                         )
                     }
                     R.id.search -> {
-                        parentFragmentManager.setFragment(
-                            R.id.fragmentContainerView,
-                            SearchNewsFragment(),
-                            SEARCH_NEWS_FRAGMENT_TAG
-                        )
                     }
                 }
                 true
