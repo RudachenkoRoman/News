@@ -10,6 +10,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.rudachenkoroman.astonIntensivFinal.R
 import com.rudachenkoroman.astonIntensivFinal.databinding.FragmentInternetConnectionBinding
 import com.rudachenkoroman.astonIntensivFinal.data.network.NetworkManager
+import com.rudachenkoroman.astonIntensivFinal.presentation.util.setFragment
 
 class InternetConnectionFragment : Fragment() {
     private lateinit var binding: FragmentInternetConnectionBinding
@@ -28,17 +29,21 @@ class InternetConnectionFragment : Fragment() {
         binding.apply {
             refreshConnection.setOnClickListener {
                 animRefresh()
-                checkConnection()
+                checkConnectionInternet()
             }
         }
     }
 
-    private fun checkConnection() {
+    private fun checkConnectionInternet() {
         val networkManager = NetworkManager(requireActivity())
-        networkManager.observe(requireActivity()) {
-            if (!it) {
-                snackbarRefreshConnection()
-            }
+        if (!networkManager.isNetworkRefresh()) {
+            snackbarRefreshConnection()
+        } else {
+            parentFragmentManager.setFragment(
+                R.id.fragmentContainerView,
+                HeadlinesFragment(),
+                HeadlinesFragment.HEADLINES_FRAGMENT_TAG
+            )
         }
     }
 
@@ -58,7 +63,7 @@ class InternetConnectionFragment : Fragment() {
         }
     }
 
-    private fun toolbarInit(){
+    private fun toolbarInit() {
         binding.apply {
             toolbar.toolbarMain.setBackgroundResource(R.color.primary60)
         }

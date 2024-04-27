@@ -28,7 +28,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        checkConnection()
+        if (savedInstanceState == null) {
+            checkConnection()
+        }
         buttonSelectionBottomNavigation()
     }
 
@@ -71,7 +73,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkConnection(){
+    private fun checkConnection() {
         val networkManager = NetworkManager(this)
         networkManager.observe(this) {
             if (!it) {
@@ -92,19 +94,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun bottomNavigationNotConnection(){
+    private fun bottomNavigationNotConnection() {
         binding.apply {
-            binding.bottomNavigation.bottomNavigation.selectedItemId = R.id.saved
-            binding.bottomNavigation.bottomNavigation.menu.findItem(R.id.headlines).isEnabled = false
-            binding.bottomNavigation.bottomNavigation.menu.findItem(R.id.sources).isEnabled = false
+            bottomNavigation.bottomNavigation.selectedItemId = R.id.saved
+            bottomNavigation.bottomNavigation.menu.findItem(R.id.headlines).isEnabled = false
+            bottomNavigation.bottomNavigation.menu.findItem(R.id.sources).isEnabled = false
         }
     }
 
-    private fun bottomNavigationConnection(){
+    private fun bottomNavigationConnection() {
         binding.apply {
-            binding.bottomNavigation.bottomNavigation.selectedItemId = R.id.headlines
-            binding.bottomNavigation.bottomNavigation.menu.findItem(R.id.headlines).isEnabled = true
-            binding.bottomNavigation.bottomNavigation.menu.findItem(R.id.sources).isEnabled = true
+            bottomNavigation.bottomNavigation.selectedItemId = R.id.headlines
+            bottomNavigation.bottomNavigation.menu.findItem(R.id.headlines).isEnabled = true
+            bottomNavigation.bottomNavigation.menu.findItem(R.id.sources).isEnabled = true
         }
     }
 }

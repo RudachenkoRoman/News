@@ -7,10 +7,9 @@ import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import androidx.lifecycle.LiveData
 
-class NetworkManager(context: Context) : LiveData<Boolean>() {
-    private var connectivityManager =
-        context.applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
+class NetworkManager(context: Context) : LiveData<Boolean>() {
+    private var connectivityManager = context.applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     override fun onActive() {
         super.onActive()
         checkNetworkConnectivity()
@@ -54,6 +53,11 @@ class NetworkManager(context: Context) : LiveData<Boolean>() {
         }.build()
 
         connectivityManager.registerNetworkCallback(requestBuilder, networkCallback)
+    }
+
+        fun isNetworkRefresh(): Boolean {
+        val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+        return (capabilities != null && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET))
     }
 
 }
