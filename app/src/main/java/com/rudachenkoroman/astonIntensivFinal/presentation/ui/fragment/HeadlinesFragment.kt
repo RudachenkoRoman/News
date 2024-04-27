@@ -118,5 +118,6 @@ class HeadlinesFragment : Fragment() {
 
     companion object{
         const val HEADLINES_FRAGMENT_TAG = "HEADLINES_FRAGMENT_TAG"
+        var language = "us"
     }
 }

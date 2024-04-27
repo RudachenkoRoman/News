@@ -18,6 +18,7 @@ import com.rudachenkoroman.astonIntensivFinal.domain.model.news.NewsResponse
 import com.rudachenkoroman.astonIntensivFinal.presentation.presenter.news.general.GeneralPresenter
 import com.rudachenkoroman.astonIntensivFinal.presentation.presenter.ViewHome
 import com.rudachenkoroman.astonIntensivFinal.presentation.ui.fragment.DetailNewsFragment.Companion.DETAIL_NEWS_FRAGMENT_TAG
+import com.rudachenkoroman.astonIntensivFinal.presentation.ui.fragment.HeadlinesFragment.Companion.language
 import com.rudachenkoroman.astonIntensivFinal.presentation.util.setFragment
 import retrofit2.Response
 
@@ -77,10 +78,8 @@ class GeneralFragment : Fragment(), ViewHome.View {
 
     companion object {
         suspend fun requestGeneralNews(): Response<NewsResponse> {
-            return RetrofitInstance.api.getNews(COUNTY_CODE_US, GENERAL)
+            return RetrofitInstance.api.getNews(language, GENERAL)
         }
-
-        private const val COUNTY_CODE_US = "us"
         const val GENERAL = "general"
     }
 }

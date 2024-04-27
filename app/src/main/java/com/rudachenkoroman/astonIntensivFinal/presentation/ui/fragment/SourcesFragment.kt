@@ -114,9 +114,10 @@ class SourcesFragment : Fragment() , ViewHome.SourceView {
 
     companion object {
         suspend fun requestSource(): Response<SourceResponse> {
-            return RetrofitInstance.api.getSource(COUNTY_CODE_US)
+            return RetrofitInstance.api.getSource(country)
         }
-        private const val COUNTY_CODE_US = "us"
+        var country = "us"
+//        private const val COUNTY_CODE_US = "us"
         const val SOURCE_FRAGMENT_TAG = "SOURCE_FRAGMENT_TAG"
     }
 }

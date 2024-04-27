@@ -18,6 +18,7 @@ import com.rudachenkoroman.astonIntensivFinal.domain.model.news.NewsResponse
 import com.rudachenkoroman.astonIntensivFinal.presentation.presenter.news.business.BusinessPresenter
 import com.rudachenkoroman.astonIntensivFinal.presentation.presenter.ViewHome
 import com.rudachenkoroman.astonIntensivFinal.presentation.ui.fragment.DetailNewsFragment.Companion.DETAIL_NEWS_FRAGMENT_TAG
+import com.rudachenkoroman.astonIntensivFinal.presentation.ui.fragment.HeadlinesFragment.Companion.language
 import com.rudachenkoroman.astonIntensivFinal.presentation.util.setFragment
 import retrofit2.Response
 
@@ -77,9 +78,8 @@ class BusinessFragment : Fragment(), ViewHome.View {
 
     companion object {
         suspend fun requestBusinessNews(): Response<NewsResponse> {
-            return RetrofitInstance.api.getNews(COUNTY_CODE_US, BUSINESS)
+            return RetrofitInstance.api.getNews(language, BUSINESS)
         }
-        private const val COUNTY_CODE_US = "us"
         const val BUSINESS = "business"
     }
 }

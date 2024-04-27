@@ -10,6 +10,8 @@ import androidx.core.util.Pair
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.rudachenkoroman.astonIntensivFinal.R
 import com.rudachenkoroman.astonIntensivFinal.databinding.FragmentFiltersBinding
+import com.rudachenkoroman.astonIntensivFinal.presentation.ui.fragment.HeadlinesFragment.Companion.language
+import com.rudachenkoroman.astonIntensivFinal.presentation.util.setFragment
 import com.rudachenkoroman.astonIntensivFinal.presentation.util.setOnBackPressedCallback
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -87,7 +89,13 @@ class FiltersFragment : Fragment() {
         binding.apply {
             toolbar.toolbarMain.setOnMenuItemClickListener {
                 when (it.itemId) {
-                    R.id.done -> requireActivity().onBackPressedDispatcher.onBackPressed()
+                    R.id.done -> {
+                        parentFragmentManager.setFragment(
+                            R.id.fragmentContainerView,
+                            HeadlinesFragment(),
+                            HeadlinesFragment.HEADLINES_FRAGMENT_TAG
+                        )
+                    }
                 }
                 true
             }
@@ -207,18 +215,21 @@ class FiltersFragment : Fragment() {
                 buttonRussian.setImageResource(R.drawable.button_russian_checked)
                 buttonEnglish.setImageResource(R.drawable.button_english)
                 buttonDeutsch.setImageResource(R.drawable.button_deutsch)
+                language = "ru"
                 languageCategory = 1
             }
             buttonEnglish.setOnClickListener {
                 buttonRussian.setImageResource(R.drawable.button_russian)
                 buttonEnglish.setImageResource(R.drawable.button_english_checked)
                 buttonDeutsch.setImageResource(R.drawable.button_deutsch)
+                language = "us"
                 languageCategory = 2
             }
             buttonDeutsch.setOnClickListener {
                 buttonRussian.setImageResource(R.drawable.button_russian)
                 buttonEnglish.setImageResource(R.drawable.button_english)
                 buttonDeutsch.setImageResource(R.drawable.button_deutsch_checked)
+                language = "de"
                 languageCategory = 3
             }
 
